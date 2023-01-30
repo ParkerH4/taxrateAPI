@@ -25,15 +25,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author super
  */
 @Entity
-@Table(name = "taxrateca")
+@Table(name = "canadataxrate")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Taxrateca.findAll", query = "SELECT t FROM Taxrateca t")
-    , @NamedQuery(name = "Taxrateca.findByTaxrateId", query = "SELECT t FROM Taxrateca t WHERE t.taxrateId = :taxrateId")
-    , @NamedQuery(name = "Taxrateca.findByGst", query = "SELECT t FROM Taxrateca t WHERE t.gst = :gst")
-    , @NamedQuery(name = "Taxrateca.findByPst", query = "SELECT t FROM Taxrateca t WHERE t.pst = :pst")
-    , @NamedQuery(name = "Taxrateca.findByHst", query = "SELECT t FROM Taxrateca t WHERE t.hst = :hst")})
-public class Taxrateca implements Serializable {
+    @NamedQuery(name = "Canadataxrate.findAll", query = "SELECT c FROM Canadataxrate c")
+    , @NamedQuery(name = "Canadataxrate.findByTaxrateId", query = "SELECT c FROM Canadataxrate c WHERE c.taxrateId = :taxrateId")
+    , @NamedQuery(name = "Canadataxrate.findByGst", query = "SELECT c FROM Canadataxrate c WHERE c.gst = :gst")
+    , @NamedQuery(name = "Canadataxrate.findByPst", query = "SELECT c FROM Canadataxrate c WHERE c.pst = :pst")
+    , @NamedQuery(name = "Canadataxrate.findByHst", query = "SELECT c FROM Canadataxrate c WHERE c.hst = :hst")})
+public class Canadataxrate implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,16 +52,16 @@ public class Taxrateca implements Serializable {
     private double hst;
     @JoinColumn(name = "location_code", referencedColumnName = "location_code")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Location locationCode;
+    private Canadalocation locationCode;
 
-    public Taxrateca() {
+    public Canadataxrate() {
     }
 
-    public Taxrateca(Integer taxrateId) {
+    public Canadataxrate(Integer taxrateId) {
         this.taxrateId = taxrateId;
     }
 
-    public Taxrateca(Integer taxrateId, double gst, double pst, double hst) {
+    public Canadataxrate(Integer taxrateId, double gst, double pst, double hst) {
         this.taxrateId = taxrateId;
         this.gst = gst;
         this.pst = pst;
@@ -100,11 +100,11 @@ public class Taxrateca implements Serializable {
         this.hst = hst;
     }
 
-    public Location getLocationCode() {
+    public Canadalocation getLocationCode() {
         return locationCode;
     }
 
-    public void setLocationCode(Location locationCode) {
+    public void setLocationCode(Canadalocation locationCode) {
         this.locationCode = locationCode;
     }
 
@@ -118,10 +118,10 @@ public class Taxrateca implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Taxrateca)) {
+        if (!(object instanceof Canadataxrate)) {
             return false;
         }
-        Taxrateca other = (Taxrateca) object;
+        Canadataxrate other = (Canadataxrate) object;
         if ((this.taxrateId == null && other.taxrateId != null) || (this.taxrateId != null && !this.taxrateId.equals(other.taxrateId))) {
             return false;
         }
@@ -130,7 +130,7 @@ public class Taxrateca implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Taxrateca[ taxrateId=" + taxrateId + " ]";
+        return "models.Canadataxrate[ taxrateId=" + taxrateId + " ]";
     }
     
 }

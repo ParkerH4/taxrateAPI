@@ -15,8 +15,21 @@ public class UserDB {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try { 
-            
+        
             User user = em.find(User.class, username);
+            return user;
+            
+        } finally {
+            em.close();
+        }
+    }
+    
+    public User get(int userId) throws Exception {
+        
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try { 
+        
+            User user = em.find(User.class, userId);
             return user;
             
         } finally {

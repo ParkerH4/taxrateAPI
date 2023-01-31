@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Kyle Helmer Entity manager
+ * @author Kyle Helmer 
  */
 public class RoleDB {
 

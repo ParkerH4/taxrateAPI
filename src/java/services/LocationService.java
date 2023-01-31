@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package services;
+import dataaccess.LocationDB;
 import models.Canadalocation;
 import java.util.List;
 /**
@@ -13,24 +14,36 @@ import java.util.List;
  */
 public class LocationService {
     
-    public List<Canadalocation> getAllCan(){
-        return null;
-    }
+    private LocationDB locDB = new LocationDB();
     
-    public Canadalocation getCan(){
-        return null;
-    }
-    
-    public void insertCan(){
+    public List<Canadalocation> getAllCan() throws Exception{
         
+        return locDB.getAllCan();
     }
     
-    public void updateCan(){
-        
+    public Canadalocation getCan(String locationCode){
+        return locDB.getCan(locationCode);
     }
     
-    public void deleteCan(){
-        
+     public List<Canadalocation> getAllCanRegion(String region) throws Exception{
+        return locDB.getAllCanRegion(region);
+    }
+    
+    public void insertCan(String locationCode, String country, String region){
+        Canadalocation canLoc = new Canadalocation(locationCode, country, region);
+        locDB.insertCan(canLoc);
+    }
+    
+    public void updateCan(String locationCode, String country, String region){
+        Canadalocation canLoc = locDB.getCan(locationCode);
+        canLoc.setCountry(country);
+        canLoc.setRegion(region);
+        locDB.updateCan(canLoc);   
+    }
+    
+    public void deleteCan(String locationCode){
+        Canadalocation canLoc = locDB.getCan(locationCode);
+        locDB.deleteCan(canLoc);
     }
     
     

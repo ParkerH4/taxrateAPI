@@ -5,6 +5,7 @@
  */
 package services;
 import models.Role;
+import dataaccess.RoleDB;
 import java.util.List;
 
 /**
@@ -15,12 +16,16 @@ import java.util.List;
 public class RoleService {
     
     
-    public List<Role> getAll(){
-        return null;
+   private RoleDB roleDB = new RoleDB();
+
+    public List<Role> getAll() throws Exception{
+        
+        return roleDB.getAll();
     }
-    
-    public Role get(){
-        return null;
+
+    public Role get(int roleID) throws Exception{
+        Role role = roleDB.get(roleID);
+        return role;
     }
     
 }

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="atVenu_TaxRate_APIPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="taxRatePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>models.Location</class>
-    <class>models.Taxrateca</class>
+    <non-jta-data-source>java:/comp/env/jdbc/taxratedb</non-jta-data-source>
     <class>models.User</class>
     <class>models.Role</class>
+    <class>models.Canadalocation</class>
+    <class>models.Canadataxrate</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/taxratedb?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="password"/>
-    </properties>
   </persistence-unit>
 </persistence>

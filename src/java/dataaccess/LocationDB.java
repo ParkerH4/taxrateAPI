@@ -5,10 +5,34 @@
  */
 package dataaccess;
 
+import java.util.List;
+import models.Canadalocation;
+
 /**
  *
- * @author super
+ * @author Kyle Helmer
+ * Entity manager 
  */
 public class LocationDB {
+    
+    public List<Canadalocation> getAllCan(){
+        return null;
+    }
+    
+    public Canadalocation getCan(){
+        return null;
+    }
+    
+    public void insertCan(){
+        
+    }
+    
+    public void updateCan(){
+        
+    }
+    
+    public void deleteCan(){
+        
+    }
     
 }

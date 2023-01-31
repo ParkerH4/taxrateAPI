@@ -10,7 +10,7 @@ import java.util.List;
 /**
  *
  * @author Kyle Helmer
- * Connection between servlet and DB
+ * 
  */
 public class LocationService {
     

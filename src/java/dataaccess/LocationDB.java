@@ -13,7 +13,7 @@ import models.Canadalocation;
 
 /**
  *
- * @author Kyle Helmer Entity manager
+ * @author Kyle Helmer 
  */
 public class LocationDB {
 

@@ -6,6 +6,7 @@
 package dataaccess;
 
 import java.util.List;
+import javax.persistence.EntityManager;
 import models.Canadalocation;
 
 /**
@@ -14,8 +15,23 @@ import models.Canadalocation;
  * Entity manager 
  */
 public class LocationDB {
+
+    public LocationDB() {
+        
+    }
     
-    public List<Canadalocation> getAllCan(){
+    
+    
+    
+    public List<Canadalocation> getAllCan() throws Exception{
+         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+                try{
+                    
+                }finally{
+                    em.close();
+                }
+        
         return null;
     }
     

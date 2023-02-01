@@ -24,19 +24,6 @@ public class UserDB {
         }
     }
     
-    public User get(int userId) throws Exception {
-        
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try { 
-        
-            User user = em.find(User.class, userId);
-            return user;
-            
-        } finally {
-            em.close();
-        }
-    }
-    
     public List<User> getAll() throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

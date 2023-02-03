@@ -7,6 +7,8 @@
     <class>models.Role</class>
     <class>models.Canadalocation</class>
     <class>models.Canadataxrate</class>
+    <class>models.Uslocation</class>
+    <class>models.Ustaxrate</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

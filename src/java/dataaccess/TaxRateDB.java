@@ -11,13 +11,13 @@ import models.Canadataxrate;
  */
 public class TaxRateDB {
     
-    public Canadataxrate getCan(int taxrateId) throws Exception {
+    public Canadataxrate getCan(String locationCode) throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
             
-            Canadataxrate taxRate = em.find(Canadataxrate.class, taxrateId);
+            Canadataxrate taxRate = em.find(Canadataxrate.class, locationCode);
             return taxRate;
             
         } finally {

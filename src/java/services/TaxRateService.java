@@ -12,9 +12,9 @@ public class TaxRateService {
     
     private TaxRateDB taxDB = new TaxRateDB();
     
-    public Canadataxrate getCan(int taxrateId) throws Exception {
+    public Canadataxrate getCan(String locationCode) throws Exception {
         
-        return taxDB.getCan(taxrateId);
+        return taxDB.getCan(locationCode);
     }
     
     public List<Canadataxrate> getAllCan() throws Exception {
@@ -28,15 +28,15 @@ public class TaxRateService {
         taxDB.insertCan(canTaxRates);
     }
     
-    public void deleteCan(int taxrateId) throws Exception {
+    public void deleteCan(String locationCode) throws Exception {
         
-        Canadataxrate canTaxRates = taxDB.getCan(taxrateId);
+        Canadataxrate canTaxRates = taxDB.getCan(locationCode);
         taxDB.deleteCan(canTaxRates);
     }
     
-    public void updateCan(int taxrateId, double gst, double pst, double hst) throws Exception {
+    public void updateCan(String locationCode, double gst, double pst, double hst) throws Exception {
         
-        Canadataxrate canTaxRates = taxDB.getCan(taxrateId);
+        Canadataxrate canTaxRates = taxDB.getCan(locationCode);
         canTaxRates.setGst(gst);
         canTaxRates.setPst(pst);
         canTaxRates.setHst(hst);

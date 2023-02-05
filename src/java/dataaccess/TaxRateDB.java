@@ -4,7 +4,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import models.Canadalocation;
 import models.Canadataxrate;
 
 /**
@@ -13,14 +12,14 @@ import models.Canadataxrate;
  */
 public class TaxRateDB {
     
-    public List<Canadalocation> getCan(String locationCode) throws Exception {
+    public Canadataxrate getCan(String locationCode) throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
             Query queryCanLocCode = em.createNamedQuery("Canadalocation.findByLocationCode");
             queryCanLocCode.setParameter("locationCode", locationCode);
-            List<Canadalocation> canTaxRate = queryCanLocCode.getResultList();
+            Canadataxrate canTaxRate = (Canadataxrate) queryCanLocCode.getSingleResult();
             return canTaxRate;
             
         } finally {

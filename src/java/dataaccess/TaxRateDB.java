@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import models.Canadalocation;
 import models.Canadataxrate;
 
 /**
@@ -19,7 +20,10 @@ public class TaxRateDB {
         try {
             Query queryCanLocCode = em.createNamedQuery("Canadalocation.findByLocationCode");
             queryCanLocCode.setParameter("locationCode", locationCode);
-            Canadataxrate canTaxRate = (Canadataxrate) queryCanLocCode.getSingleResult();
+            Canadalocation canLoc = (Canadalocation) queryCanLocCode.getSingleResult();
+            
+            Canadataxrate canTaxRate = canLoc.getCanadataxrateList().get(0);
+            
             return canTaxRate;
             
         } finally {

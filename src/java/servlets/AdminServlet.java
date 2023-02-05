@@ -18,6 +18,21 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String action = request.getParameter("action");
+        String searchField = request.getParameter("searchfield");
+
+        TaxRateService trs = new TaxRateService();
+        LocationService ls = new LocationService();
+        Canadataxrate canTax = null;
+
+        try {
+            canTax = trs.getCan(searchField);
+            request.setAttribute("taxRate", canTax);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
@@ -51,19 +66,17 @@ public class AdminServlet extends HttpServlet {
         if (action != null) {
 
             switch (action) {
-                
-                case "search": if (searchString != null) {
-                try {
-                    canTax = trs.getCan(searchString);
-                    
-                    
-                    
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                }
-                
+
+                case "search":
+                    if (searchString != null) {
+                        try {
+                            canTax = trs.getCan(searchString);
+
+                        } catch (Exception ex) {
+                            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
                 case "add":
                     if (country == null || region == null || locationcode == null || taxRate1 == null || taxRate2 == null || taxRate3 == null
                             || country.equals("") || region.equals("") || locationcode.equals("") || taxRate1.equals("") || taxRate2.equals("") || taxRate3.equals("")) {

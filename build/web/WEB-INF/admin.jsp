@@ -21,7 +21,7 @@
     <div class="hidden" id="search">
         
       <!-- search by location code -->
-      <form action="search">
+      <form action="admin">
         <input type="text" name="searchfield" value="" placeholder="Postal or Zip Code" />
         <input type="submit" value="Search" />
       </form>
@@ -53,7 +53,7 @@
       </form>
     </div>
 
-    <div class="hidden" id="table">
+    <div class="" id="table">
       <!-- search table -->
       <table>
         <tr>
@@ -66,12 +66,12 @@
         </tr>
 
         <tr>
-          <td contenteditable id="country"></td>
-          <td contenteditable id="region"></td>
-          <td contenteditable id="locationCode"></td>
-          <td contenteditable id="taxRate1"></td>
-          <td contenteditable id="taxRate2"></td>
-          <td contenteditable id="taxRate3"></td>
+          <td contenteditable id="country">${taxRate.getLocationCode().getCountry()}</td>
+          <td contenteditable id="region">${taxRate.getLocationCode().getRegion()}</td>
+          <td contenteditable id="locationCode">${taxRate.getLocationCode().getLocationCode()}</td>
+          <td contenteditable id="taxRate1">${taxRate.getGst()}</td>
+          <td contenteditable id="taxRate2">${taxRate.getPst()}</td>
+          <td contenteditable id="taxRate3">${taxRate.getHst()}</td>
         </tr>
       </table>
 

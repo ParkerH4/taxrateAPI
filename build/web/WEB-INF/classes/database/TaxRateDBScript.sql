@@ -33,12 +33,26 @@ CREATE TABLE IF NOT EXISTS `taxratedb`.`canadalocation` (
 	`region` VARCHAR(30) NOT NULL,
 	PRIMARY KEY(`location_code`)
 );
+CREATE TABLE IF NOT EXISTS `taxratedb`.`ustaxrate` (
+	`taxrate_id` INT(10) NOT NULL AUTO_INCREMENT,
+	`state_tax` DOUBLE NOT NULL, 
+	`zip_code` VARCHAR(7) NOT NULL ,
+	PRIMARY KEY (`taxrate_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `taxratedb`.`uslocation` (
+	`zip_code` VARCHAR(10) NOT NULL,
+	`country` VARCHAR(30) NOT NULL,
+	`state` VARCHAR(30) NOT NULL,
+	PRIMARY KEY(`zip_code`)
+);
 	
 
 
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_role_id` FOREIGN KEY(`role_id`) REFERENCES `taxratedb`.`role` (`role_id`);
 --ALTER TABLE `user` ADD CONSTRAINT `ck_user_pass` CHECK (`password` REGEXP '^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{6,}$');
 ALTER TABLE `canadataxrate` ADD CONSTRAINT `fk_taxrateca_location_code` FOREIGN KEY(`location_code`) REFERENCES `taxratedb`.`canadalocation` (`location_code`);
+ALTER TABLE `ustaxrate` ADD CONSTRAINT `fk_taxrateus_zip_code` FOREIGN KEY(`zip_code`) REFERENCES `taxratedb`.`uslocation` (`zip_code`);
 
 
 
@@ -3351,3 +3365,4 @@ INSERT INTO `canadataxrate` (`gst`,`pst`,`hst`,`location_code`) VALUES (5.0,0.0,
 INSERT INTO `canadataxrate` (`gst`,`pst`,`hst`,`location_code`) VALUES (5.0,0.0,0.0,'X0B');
 INSERT INTO `canadataxrate` (`gst`,`pst`,`hst`,`location_code`) VALUES (5.0,0.0,0.0,'X0C');
 INSERT INTO `canadataxrate` (`gst`,`pst`,`hst`,`location_code`) VALUES (5.0,0.0,0.0,'X0A');
+

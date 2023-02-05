@@ -1,0 +1,90 @@
+body {
+  background-color: #ececec;
+}
+
+/* Center the login box and add some styling */
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding-bottom: 40px;
+  padding-right: 40px;
+  background: #f8f5f5;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border-radius: 5px;
+}
+
+.login-box-header img {
+  height: 50px;
+  width: 100%;
+}
+/* Style the logo and text */
+.logo {
+  width: 110px;
+  height: 100px;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 400%;
+}
+
+.login-box h1 {
+  margin: 0;
+  margin-left: 50px;
+  padding: 0;
+  font-size: 26px;
+  font-weight: bold;
+  color: #c3c3c3;
+}
+
+.login-box form {
+  padding-left: 40px;
+}
+
+/* Style the input fields */
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 3px solid #ccc;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #333333;
+  outline: none;
+}
+
+/* Style the input fields */
+.login-box input[type="text"]:focus,
+.login-box input[type="password"]:focus {
+  border: 3px solid #67c9e7;
+}
+
+/* Style the login button */
+.login-box input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: #67c9e7;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  transition: background 0.5s ease;
+}
+
+/* Add a hover effect for the login button */
+.login-box input[type="submit"]:hover {
+  background: #ccc;
+  color: #333333;
+  transition-delay: 0s;
+}
+
+.errorMSG {
+  display: none;
+}

@@ -2,6 +2,7 @@ package services;
 
 import dataaccess.TaxRateDB;
 import java.util.List;
+import models.Canadalocation;
 import models.Canadataxrate;
 
 /**
@@ -12,7 +13,7 @@ public class TaxRateService {
     
     private TaxRateDB taxDB = new TaxRateDB();
     
-    public Canadataxrate getCan(String locationCode) throws Exception {
+    public List<Canadalocation> getCan(String locationCode) throws Exception {
         
         return taxDB.getCan(locationCode);
     }
@@ -30,13 +31,13 @@ public class TaxRateService {
     
     public void deleteCan(String locationCode) throws Exception {
         
-        Canadataxrate canTaxRates = taxDB.getCan(locationCode);
-        taxDB.deleteCan(canTaxRates);
+        List<Canadalocation> canTaxRates = taxDB.getCan(locationCode);
+        taxDB.deleteCan((Canadataxrate) canTaxRates);
     }
     
     public void updateCan(String locationCode, double gst, double pst, double hst) throws Exception {
         
-        Canadataxrate canTaxRates = taxDB.getCan(locationCode);
+        Canadataxrate canTaxRates = (Canadataxrate) taxDB.getCan(locationCode);
         canTaxRates.setGst(gst);
         canTaxRates.setPst(pst);
         canTaxRates.setHst(hst);

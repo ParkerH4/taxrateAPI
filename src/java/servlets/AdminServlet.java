@@ -1,11 +1,14 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Canadataxrate;
 import services.LocationService;
 import services.TaxRateService;
 import services.UserService;
@@ -30,6 +33,7 @@ public class AdminServlet extends HttpServlet {
         String userID = request.getParameter("userID");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String searchString = request.getParameter("searchfield");
 
         String country = request.getParameter("country");
         String region = request.getParameter("region");
@@ -42,10 +46,24 @@ public class AdminServlet extends HttpServlet {
         UserService us = new UserService();
         TaxRateService trs = new TaxRateService();
         LocationService ls = new LocationService();
+        Canadataxrate canTax = new Canadataxrate();
 
         if (action != null) {
 
             switch (action) {
+                
+                case "search": if (searchString != null) {
+                try {
+                    canTax = trs.getCan(searchString);
+                    
+                    
+                    
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+                
                 case "add":
                     if (country == null || region == null || locationcode == null || taxRate1 == null || taxRate2 == null || taxRate3 == null
                             || country.equals("") || region.equals("") || locationcode.equals("") || taxRate1.equals("") || taxRate2.equals("") || taxRate3.equals("")) {

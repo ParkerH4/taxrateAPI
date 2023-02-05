@@ -16,9 +16,10 @@
             <br />
             <h1>atVenu Admin Login</h1>
             <br />
-            <form>
-                <input type="text" placeholder="Username" />
-                <input type="password" placeholder="Password" />
+            
+            <form action="login" method="post">
+                <input type="text" name="username" placeholder="Username" />
+                <input type="password" name="password" placeholder="Password" />
                 <input type="submit" value="Login" />
             </form>
         </div>

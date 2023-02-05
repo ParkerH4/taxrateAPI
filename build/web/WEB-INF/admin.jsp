@@ -19,9 +19,10 @@
     <input type="button" onclick="revealSearch();" value="Search for tax rate" /><br />
 
     <div class="hidden" id="search">
+        
       <!-- search by location code -->
-      <form action="">
-        <input type="text" value="" placeholder="Postal or Zip Code" />
+      <form action="search">
+        <input type="text" name="searchfield" value="" placeholder="Postal or Zip Code" />
         <input type="submit" value="Search" />
       </form>
     </div>

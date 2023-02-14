@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.Canadataxrate;
+import models.CanadaTaxRate;
 import services.LocationService;
 import services.TaxRateService;
 
@@ -23,7 +23,7 @@ public class AdminServlet extends HttpServlet {
 
         TaxRateService trs = new TaxRateService();
         LocationService ls = new LocationService();
-        Canadataxrate canTax = null;
+        CanadaTaxRate canTax = null;
 
         try {
             canTax = trs.getCan(searchField);
@@ -55,7 +55,7 @@ public class AdminServlet extends HttpServlet {
 
         TaxRateService trs = new TaxRateService();
         LocationService ls = new LocationService();
-        Canadataxrate canTax = new Canadataxrate();
+        CanadaTaxRate canTax = new CanadaTaxRate();
 
         if (action != null) {
 

@@ -45,9 +45,9 @@ public class Location implements Serializable {
     @Basic(optional = false)
     @Column(name = "region")
     private String region;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationCode", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", fetch = FetchType.EAGER)
     private List<CanadaTaxRate> canadaTaxRateList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationCode", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", fetch = FetchType.EAGER)
     private List<UsTaxRate> usTaxRateList;
 
     public Location() {

@@ -4,48 +4,48 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import models.Canadalocation;
-import models.Canadataxrate;
+import models.Location;
+import models.UsTaxRate;
 
 /**
  *
  * @author William Lau
  */
-public class TaxRateDB {
+public class UsTaxRateDB {
     
-    public Canadataxrate getCan(String locationCode) throws Exception {
+    public UsTaxRate getUs(String locationCode) throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Query queryCanLocCode = em.createNamedQuery("Canadalocation.findByLocationCode");
+            Query queryCanLocCode = em.createNamedQuery("Location.findByLocationCode");
             queryCanLocCode.setParameter("locationCode", locationCode);
-            Canadalocation canLoc = (Canadalocation) queryCanLocCode.getSingleResult();
+            Location Loc = (Location) queryCanLocCode.getSingleResult();
             
-            Canadataxrate canTaxRate = canLoc.getCanadataxrateList().get(0);
+            UsTaxRate usTaxRate = Loc.getUsTaxRateList().get(0);
             
-            return canTaxRate;
+            return usTaxRate;
             
         } finally {
             em.close();
         }
     }
     
-    public List<Canadataxrate> getAllCan() throws Exception {
+    public List<UsTaxRate> getAllUs() throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
             
-            List<Canadataxrate> canTaxRates = em.createNamedQuery("Canadataxrate.findAll", Canadataxrate.class).getResultList();
-            return canTaxRates;
+            List<UsTaxRate> taxRates = em.createNamedQuery("UsTaxRate.findAll", UsTaxRate.class).getResultList();
+            return taxRates;
             
         } finally {
             em.close();
         }
     }
     
-    public void insertCan(Canadataxrate canTaxRate) throws Exception {
+    public void insertUs(UsTaxRate usTaxRate) throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -53,7 +53,7 @@ public class TaxRateDB {
         try {
          
             tran.begin();
-            em.persist(canTaxRate);
+            em.persist(usTaxRate);
             tran.commit();
             
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class TaxRateDB {
         }
     }
     
-    public void deleteCan(Canadataxrate canTaxRate) throws Exception {
+    public void deleteUs(UsTaxRate usTaxRate) throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -71,7 +71,7 @@ public class TaxRateDB {
         try {
            
             tran.begin();
-            em.remove(em.merge(canTaxRate));
+            em.remove(em.merge(usTaxRate));
             tran.commit();
             
         } catch (Exception e) {
@@ -81,7 +81,7 @@ public class TaxRateDB {
         }
     }
     
-    public void updateCan(Canadataxrate canTaxRate) throws Exception {
+    public void updateUs(UsTaxRate usTaxRate) throws Exception {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -89,7 +89,7 @@ public class TaxRateDB {
         try {
             
             tran.begin();
-            em.merge(canTaxRate);
+            em.merge(usTaxRate);
             tran.commit();
             
         } catch (Exception e) {

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Kyle Helmer
+ * @author super
  */
 @Entity
 @Table(name = "location")

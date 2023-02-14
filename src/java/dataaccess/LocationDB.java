@@ -28,8 +28,8 @@ public class LocationDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            List<Location> canLocations = em.createNamedQuery("Location.findAll", Location.class).getResultList();
-            return canLocations;
+            List<Location> locations = em.createNamedQuery("Location.findAll", Location.class).getResultList();
+            return locations;
 
         } finally {
             em.close();
@@ -42,8 +42,8 @@ public class LocationDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            Location can = em.find(Location.class, locationCode);
-            return can;
+            Location loc = em.find(Location.class, locationCode);
+            return loc;
         } finally {
             em.close();
         }
@@ -55,15 +55,15 @@ public class LocationDB {
         try {
             Query queryCanLocByregion = em.createNamedQuery("Location.findByRegion");
             queryCanLocByregion.setParameter("region", region);
-            List<Location> canLocations = queryCanLocByregion.getResultList();
-            return canLocations;
+            List<Location> locations = queryCanLocByregion.getResultList();
+            return locations;
         } finally {
             em.close();
         }
 
     }
 
-    public void insertLoc(Location canLoc) {
+    public void insertLoc(Location loc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -71,7 +71,7 @@ public class LocationDB {
         try {
 
             trans.begin();
-            em.persist(canLoc);
+            em.persist(loc);
             trans.commit();
 
         } finally {
@@ -80,14 +80,14 @@ public class LocationDB {
 
     }
 
-    public void updateLoc(Location canLoc) {
+    public void updateLoc(Location loc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.persist(canLoc);
+            em.persist(loc);
             trans.commit();
         } finally {
             em.close();
@@ -95,14 +95,14 @@ public class LocationDB {
 
     }
 
-    public void deleteLoc(Location canLoc) {
+    public void deleteLoc(Location loc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.remove(em.merge(canLoc));
+            em.remove(em.merge(loc));
             trans.commit();
         } finally {
             em.close();

@@ -19,68 +19,37 @@ public class LocationService {
     
     
     
-    public List<Location> getAllCan() throws Exception{
+    public List<Location> getAll() throws Exception{
         
-        return locDB.getAllCan();
+        return locDB.getAll();
     }
     
-    public Location getCan(String locationCode){
-        return locDB.getCan(locationCode);
+    public Location getLoc(String locationCode){
+        return locDB.getLoc(locationCode);
     }
     
-     public List<Location> getAllCanRegion(String region) throws Exception{
-        return locDB.getAllCanRegion(region);
+     public List<Location> getAllRegion(String region) throws Exception{
+        return locDB.getAllRegion(region);
     }
     
-    public void insertCan(String locationCode, String country, String region){
-        Location canLoc = new Location(locationCode, country, region);
-        locDB.insertCan(canLoc);
+    public void insertLoc(String locationCode, String country, String region){
+        Location loc = new Location(locationCode, country, region);
+        locDB.insertLoc(loc);
     }
     
-    public void updateCan(String locationCode, String country, String region){
-        Location canLoc = locDB.getCan(locationCode);
-        canLoc.setCountry(country);
-        canLoc.setRegion(region);
-        locDB.updateCan(canLoc);   
+    public void updateLoc(String locationCode, String country, String region){
+        Location loc = locDB.getLoc(locationCode);
+        loc.setCountry(country);
+        loc.setRegion(region);
+        locDB.updateLoc(loc);   
     }
     
-    public void deleteCan(String locationCode){
-        Location canLoc = locDB.getCan(locationCode);
-        locDB.deleteCan(canLoc);
+    public void deleteLoc(String locationCode){
+        Location loc = locDB.getLoc(locationCode);
+        locDB.deleteLoc(loc);
     }
     
-    //Us related methods 
-    
-    
-    public List<Uslocation> getAllUs() throws Exception{
-        
-        return locDB.getAllUs();
-    }
-    
-    public Uslocation getUs(String zipCode){
-       return locDB.getUs(zipCode);
-    }
-    
-     public List<Uslocation> getAllUsRegion(String state) throws Exception{
-        return locDB.getAllUsState(state);
-    }
-    
-    public void insertUs(String zipCode, String country, String state){
-        Uslocation usLoc = new Uslocation(zipCode, country, state);
-        locDB.insertUs(usLoc);
-    }
-    
-    public void updateUs(String zipCode, String country, String state){
-       Uslocation usLoc = locDB.getUs(zipCode);
-        usLoc.setCountry(country);
-        usLoc.setState(state);
-        locDB.updateUs(usLoc);   
-    }
-    
-    public void deleteUs(String zipCode){
-        Uslocation usLoc = locDB.getUs(zipCode);
-        locDB.deleteUs(usLoc);
-    }
+   
     
     
 }

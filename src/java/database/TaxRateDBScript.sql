@@ -62,6 +62,7 @@ INSERT INTO `role` VALUES (2, 'User' );
 INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('AdminAlpha','alpha', 1); 
 INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('AdminBeta','beta', 1); 
 INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('AdminOmega','omega', 1); 
+INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('a','a', 1);
 
 INSERT INTO `canadalocation` VALUES ('V3G','CAN','BC');
 INSERT INTO `canadalocation` VALUES ('V4X','CAN','BC');

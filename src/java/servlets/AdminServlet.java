@@ -11,14 +11,13 @@ import javax.servlet.http.HttpSession;
 import models.Canadataxrate;
 import services.LocationService;
 import services.TaxRateService;
-import services.UserService;
 
 public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
         String searchField = request.getParameter("searchfield");
 
@@ -29,7 +28,7 @@ public class AdminServlet extends HttpServlet {
         try {
             canTax = trs.getCan(searchField);
             request.setAttribute("taxRate", canTax);
-            
+
         } catch (Exception ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -44,21 +43,16 @@ public class AdminServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String action = request.getParameter("action");
+        String searchString = request.getParameter("searchField");
 
-        String userID = request.getParameter("userID");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String searchString = request.getParameter("searchfield");
-
+        // variables for a tax rate
         String country = request.getParameter("country");
         String region = request.getParameter("region");
-        String locationcode = request.getParameter("locationcode");
+        String locationCode = request.getParameter("locationCode");
         String taxRate1 = request.getParameter("taxRate1");
         String taxRate2 = request.getParameter("taxRate2");
         String taxRate3 = request.getParameter("taxRate3");
-        String taxRateID = request.getParameter("taxRateID");
 
-        UserService us = new UserService();
         TaxRateService trs = new TaxRateService();
         LocationService ls = new LocationService();
         Canadataxrate canTax = new Canadataxrate();
@@ -78,37 +72,59 @@ public class AdminServlet extends HttpServlet {
                     }
 
                 case "add":
-                    if (country == null || region == null || locationcode == null || taxRate1 == null || taxRate2 == null || taxRate3 == null
-                            || country.equals("") || region.equals("") || locationcode.equals("") || taxRate1.equals("") || taxRate2.equals("") || taxRate3.equals("")) {
-                        session.setAttribute("message", "Error adding TaxRate");
+                    if (country == null || region == null || locationCode == null || taxRate1 == null || taxRate2 == null || taxRate3 == null
+                            || country.equals("") || region.equals("") || locationCode.equals("") || taxRate1.equals("") || taxRate2.equals("") || taxRate3.equals("")) {
+                        session.setAttribute("message", "Error adding TaxRate. Null or empty fields in the adding form.");
                         response.sendRedirect("admin");
                         return;
                     }
 
-                    trs.insert(country, region, locationcode, taxRate1, taxRate2, taxRate3);
+                     {
+                        try {
+                            trs.insertCan(country, region, locationCode, taxRate1, taxRate2, taxRate3);
+                        } catch (Exception ex) {
+                            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     response.sendRedirect("admin");
                     return;
 
                 case "update":
-                    if (country == null || region == null || locationcode == null || taxRate1 == null || taxRate2 == null || taxRate3 == null
-                            || country.equals("") || region.equals("") || locationcode.equals("") || taxRate1.equals("") || taxRate2.equals("") || taxRate3.equals("")) {
+                    if (country == null || region == null || locationCode == null || taxRate1 == null || taxRate2 == null || taxRate3 == null
+                            || country.equals("") || region.equals("") || locationCode.equals("") || taxRate1.equals("") || taxRate2.equals("") || taxRate3.equals("")) {
                         session.setAttribute("message", "Error updating tax rate");
                         response.sendRedirect("admin");
                         return;
                     }
 
-                    trs.update(country, region, locationcode, taxRate1, taxRate2, taxRate3);
-                    session.setAttribute("message", "Edited Tax Rate!");
+                     {
+                        try {
+                            trs.updateCan(country, region, locationCode, taxRate1, taxRate2, taxRate3);
+                        } catch (Exception ex) {
+                            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    session.setAttribute("message", "Updated Tax Rate!");
                     response.sendRedirect("admin");
                     return;
 
-                case "delete":
-                    trs.delete(locationcode);
-                    response.sendRedirect("admin");
-                    return;
+                case "delete": {
+                    try {
+                        if (locationCode.equals("") || locationCode == null) {
+                            session.setAttribute("message", "Fuck bitch.");
+                        } else {
+                            trs.deleteCan(searchString);
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        session.setAttribute("message", "Error deleting tax rate");
+                    }
+                }
+                response.sendRedirect("admin");
+                return;
 
                 case "cancel":
-                    session.setAttribute("message", "Cancelled Changes");
+                    session.setAttribute("message", "Cancelled. Changes were not saved.");
                     response.sendRedirect("admin");
                     return;
 

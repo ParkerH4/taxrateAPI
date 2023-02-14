@@ -2,92 +2,94 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>atVenu Tax Rate API - Admin</title>
-    <link rel="stylesheet" href="./assets/styles/admin.css" />
-  </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>atVenu Tax Rate API - Admin</title>
+        <link rel="stylesheet" href="./assets/styles/admin.css" />
+    </head>
 
-  <body>
-    <div class="header">
-      <h1>atVenu Tax Rate API</h1>
-      <img src="./assets/images/LogoOnBlue.png" />
-    </div>
+    <body>
+        <div class="header">
+            <h1>atVenu Tax Rate API</h1>
+            <img src="./assets/images/LogoOnBlue.png" />
+        </div>
 
-    <input type="button" onclick="revealAdd();" value="Add new tax rate" />
-    <br />
-    <input type="button" onclick="revealSearch();" value="Search for tax rate" /><br />
-
-    <div class="hidden" id="search">
-        
-      <!-- search by location code -->
-      <form action="admin">
-        <input type="text" name="searchfield" value="" placeholder="Postal or Zip Code" />
-        <input type="submit" value="Search" />
-      </form>
-    </div>
-
-    <div class="hidden" id="add">
-      <!-- form to add new tax rate to DB -->
-      <form method="post" action="inventory">
-        <select name="country">
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>
-        </select>
-        <br />
-        <input type="text" name="region" placeholder="Region" />
-        <br />
-        <input type="text" name="locationcode" placeholder="LocationCode" />
-        <br />
-        <input type="text" name="taxRate1" placeholder="GST" />
-        <br />
-        <input type="text" name="taxRate2" placeholder="PST" />
-        <br />
-        <input type="text" name="taxRate3" placeholder="HST" />
+        <div id="message">${message}</div>
         <br />
 
-        <input type="hidden" name="locationCode" value="0" />
-        <input type="hidden" name="taxRateID" value="0" />
-        <input type="hidden" name="action" value="add" />
-        <input type="submit" value="Add" />
-      </form>
-    </div>
+        <input type="button" onclick="revealAdd();" value="Add new tax rate" />
+        <br />
+        <input type="button" onclick="revealSearch();" value="Search for tax rate" /><br />
 
-    <div class="" id="table">
-      <!-- search table -->
-      <table>
-        <tr>
-          <th>Country</th>
-          <th>Province</th>
-          <th>Location Code</th>
-          <th>GST</th>
-          <th>PST</th>
-          <th>HST</th>
-        </tr>
+        <!-- search by location code -->
+        <div class="hidden" id="search">
+            <form action="admin">
+                <input type="text" name="searchField" value="" placeholder="Postal or Zip Code" />
+                <input type="submit" value="Search" />
+            </form>
+        </div>
 
-        <tr>
-          <td contenteditable id="country">${taxRate.getLocationCode().getCountry()}</td>
-          <td contenteditable id="region">${taxRate.getLocationCode().getRegion()}</td>
-          <td contenteditable id="locationCode">${taxRate.getLocationCode().getLocationCode()}</td>
-          <td contenteditable id="taxRate1">${taxRate.getGst()}</td>
-          <td contenteditable id="taxRate2">${taxRate.getPst()}</td>
-          <td contenteditable id="taxRate3">${taxRate.getHst()}</td>
-        </tr>
-      </table>
+        <!-- form to add new tax rate to DB -->
+        <div class="hidden" id="add">
+            <form method="post" action="admin">
+                <select name="country">
+                    <option value="CAN">Canada</option>
+                    <option value="USA">USA</option>
+                </select>
+                <br />
+                <input type="text" name="region" placeholder="Region" />
+                <input type="text" name="locationcode" placeholder="LocationCode" />
+                <input type="text" name="taxRate1" placeholder="GST" />
+                <input type="text" name="taxRate2" placeholder="PST" />
+                <input type="text" name="taxRate3" placeholder="HST" />
+                <br />
 
-      <!-- submit button for changes -->
-      <form method="post" action="admin">
-        <input type="hidden" name="action" value="update" />
-        <input type="submit" value="Save Changes" />
-      </form>
+                <input type="hidden" name="action" value="add" />
+                <input type="submit" value="Add Tax Rate To Database" />
+            </form>
+        </div>
 
-      <!-- cancel changes button -->
-      <form method="post" action="admin">
-        <input type="hidden" name="action" value="cancel" />
-        <input type="submit" value="Cancel Edit" />
-      </form>
-    </div>
+        <!-- search table -->
+        <div class="" id="searchTable">
+            <table>
+                <tr>
+                    <th>Country</th>
+                    <th>Province</th>
+                    <th>Location Code</th>
+                    <th>GST</th>
+                    <th>PST</th>
+                    <th>HST</th>
+                </tr>
 
-    <script type="text/javascript" src="./assets/scripts/admin.js"></script>
-  </body>
+                <tr>
+                    <td contenteditable name="country">${taxRate.getLocationCode().getCountry()}</td>
+                    <td contenteditable name="region">${taxRate.getLocationCode().getRegion()}</td>
+                    <td contenteditable name="locationCode">${taxRate.getLocationCode().getLocationCode()}</td>
+                    <td contenteditable name="taxRate1">${taxRate.getGst()}</td>
+                    <td contenteditable name="taxRate2">${taxRate.getPst()}</td>
+                    <td contenteditable name="taxRate3">${taxRate.getHst()}</td>
+                </tr>
+            </table>
+
+            <!-- make changes and update button -->
+            <form method="post" action="admin">
+                <input type="hidden" name="action" value="update" />
+                <input type="submit" value="Save Changes" />
+            </form>
+
+            <!-- cancel changes button -->
+            <form method="post" action="admin">
+                <input type="hidden" name="action" value="cancel" />
+                <input type="submit" value="Cancel Edit" />
+            </form>
+        </div>
+
+        <!-- delete tax rate button -->
+        <form method="post" action="admin">
+            <input type="hidden" name="action" value="delete" />
+            <input type="submit" value="Delete Tax Rate" />
+        </form>
+
+        <script type="text/javascript" src="./assets/scripts/admin.js"></script>
+    </body>
 </html>

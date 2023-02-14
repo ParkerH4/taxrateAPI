@@ -13,7 +13,7 @@ import models.CanadaTaxRate;
  */
 public class CanadaTaxRateDB {
 
-    public CanadaTaxRate getCan(String locationCode) throws Exception {
+    public CanadaTaxRate getCan(String locationCode){
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -30,7 +30,7 @@ public class CanadaTaxRateDB {
         }
     }
 
-    public List<CanadaTaxRate> getAllCan() throws Exception {
+    public List<CanadaTaxRate> getAllCan()  {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -44,7 +44,7 @@ public class CanadaTaxRateDB {
         }
     }
 
-    public void insertCan(CanadaTaxRate canTaxRate) throws Exception {
+    public void insertCan(CanadaTaxRate canTaxRate)  {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -66,7 +66,7 @@ public class CanadaTaxRateDB {
         }
     }
 
-    public void deleteCan(CanadaTaxRate canTaxRate) throws Exception {
+    public void deleteCan(CanadaTaxRate canTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -84,7 +84,7 @@ public class CanadaTaxRateDB {
         }
     }
 
-    public void updateCan(CanadaTaxRate canTaxRate) throws Exception {
+    public void updateCan(CanadaTaxRate canTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();

@@ -13,7 +13,7 @@ import models.UsTaxRate;
  */
 public class UsTaxRateDB {
     
-    public UsTaxRate getUs(String locationCode) throws Exception {
+    public UsTaxRate getUs(String locationCode) {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -31,7 +31,7 @@ public class UsTaxRateDB {
         }
     }
     
-    public List<UsTaxRate> getAllUs() throws Exception {
+    public List<UsTaxRate> getAllUs(){
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -45,7 +45,7 @@ public class UsTaxRateDB {
         }
     }
     
-    public void insertUs(UsTaxRate usTaxRate) throws Exception {
+    public void insertUs(UsTaxRate usTaxRate){
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -63,7 +63,7 @@ public class UsTaxRateDB {
         }
     }
     
-    public void deleteUs(UsTaxRate usTaxRate) throws Exception {
+    public void deleteUs(UsTaxRate usTaxRate){
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
@@ -81,7 +81,7 @@ public class UsTaxRateDB {
         }
     }
     
-    public void updateUs(UsTaxRate usTaxRate) throws Exception {
+    public void updateUs(UsTaxRate usTaxRate){
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();

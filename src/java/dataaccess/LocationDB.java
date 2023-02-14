@@ -11,10 +11,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import models.Location;
 
-
 /**
  *
- * @author Kyle Helmer 
+ * @author Kyle Helmer
  */
 public class LocationDB {
 
@@ -22,9 +21,8 @@ public class LocationDB {
 
     }
 
-       //Canada related methods 
-    
-    public List<Location> getAll() throws Exception {
+    //Canada related methods 
+    public List<Location> getAll() {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
@@ -49,7 +47,7 @@ public class LocationDB {
         }
     }
 
-    public List<Location> getAllRegion(String region) throws Exception {
+    public List<Location> getAllRegion(String region) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
@@ -74,6 +72,8 @@ public class LocationDB {
             em.persist(loc);
             trans.commit();
 
+        } catch (Exception e) {
+            trans.rollback();
         } finally {
             em.close();
         }
@@ -89,6 +89,8 @@ public class LocationDB {
             trans.begin();
             em.persist(loc);
             trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
         } finally {
             em.close();
         }
@@ -104,12 +106,12 @@ public class LocationDB {
             trans.begin();
             em.remove(em.merge(loc));
             trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
         } finally {
             em.close();
         }
 
     }
-    
-       
 
 }

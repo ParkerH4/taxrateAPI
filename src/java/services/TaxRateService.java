@@ -37,7 +37,7 @@ public class TaxRateService {
 
         Location newLoc = new Location(locationCode, country, region);
         locDB.insertLoc(newLoc);
-
+       
         CanadaTaxRate canTaxRate = new CanadaTaxRate(0, parseGst, parsePst, parseHst);
         canTaxRate.setLocation(newLoc);
 

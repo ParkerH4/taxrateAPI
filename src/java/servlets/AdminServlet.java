@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        String searchField = request.getParameter("searchfield");
+        String searchField = request.getParameter("searchField");
 
         TaxRateService trs = new TaxRateService();
         LocationService ls = new LocationService();
@@ -48,7 +49,7 @@ public class AdminServlet extends HttpServlet {
         // variables for a tax rate
         String country = request.getParameter("country");
         String region = request.getParameter("region");
-        String locationCode = request.getParameter("locationCode");
+        String locationCode = request.getParameter("locationcode");
         String taxRate1 = request.getParameter("taxRate1");
         String taxRate2 = request.getParameter("taxRate2");
         String taxRate3 = request.getParameter("taxRate3");
@@ -82,10 +83,18 @@ public class AdminServlet extends HttpServlet {
                      {
                         try {
                             trs.insertCan(country, region, locationCode, taxRate1, taxRate2, taxRate3);
+                            
                         } catch (Exception ex) {
                             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
+                     try{
+                         List<CanadaTaxRate> rates = trs.getAllCan();
+                         request.setAttribute("rates", rates);
+                     }catch(Exception e){
+                         
+                     }
+                       
                     response.sendRedirect("admin");
                     return;
 
@@ -129,7 +138,7 @@ public class AdminServlet extends HttpServlet {
                     return;
 
             }
-
+            
             getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
         }
     }

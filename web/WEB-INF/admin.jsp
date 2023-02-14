@@ -62,9 +62,9 @@
                 </tr>
 
                 <tr>
-                    <td contenteditable name="country">${taxRate.getLocationCode().getCountry()}</td>
-                    <td contenteditable name="region">${taxRate.getLocationCode().getRegion()}</td>
-                    <td contenteditable name="locationCode">${taxRate.getLocationCode().getLocationCode()}</td>
+                    <td contenteditable name="country">${taxRate.getLocation().getCountry()}</td>
+                    <td contenteditable name="region">${taxRate.getLocation().getRegion()}</td>
+                    <td contenteditable name="locationCode">${taxRate.getLocation().getLocationCode()}</td>
                     <td contenteditable name="taxRate1">${taxRate.getGst()}</td>
                     <td contenteditable name="taxRate2">${taxRate.getPst()}</td>
                     <td contenteditable name="taxRate3">${taxRate.getHst()}</td>

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Kyle Helmer
+ * @author super
  */
 @Entity
 @Table(name = "ustaxrate")
@@ -58,11 +58,11 @@ public class UsTaxRate implements Serializable {
         this.stateTax = stateTax;
     }
 
-    public Integer getTaxRateId() {
+    public Integer getTaxrateId() {
         return taxRateId;
     }
 
-    public void setTaxRateId(Integer taxRateId) {
+    public void setTaxrateId(Integer taxRateId) {
         this.taxRateId = taxRateId;
     }
 

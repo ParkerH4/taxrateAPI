@@ -3,12 +3,13 @@
   <persistence-unit name="taxRatePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source>java:/comp/env/jdbc/taxratedb</non-jta-data-source>
-    <class>models.User</class>
-    <class>models.Role</class>
-    <class>models.Canadalocation</class>
     <class>models.Canadataxrate</class>
-    <class>models.Uslocation</class>
+    <class>models.Role</class>
     <class>models.Ustaxrate</class>
+    <class>models.Location</class>
+    <class>models.User</class>
+    <class>models.UsTaxRate</class>
+    <class>models.CanadaTaxRate</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

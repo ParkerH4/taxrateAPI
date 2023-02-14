@@ -22,17 +22,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author super
+ * @author Kyle Helmer
  */
 @Entity
-@Table(name = "canadalocation")
+@Table(name = "location")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Canadalocation.findAll", query = "SELECT c FROM Canadalocation c")
-    , @NamedQuery(name = "Canadalocation.findByLocationCode", query = "SELECT c FROM Canadalocation c WHERE c.locationCode = :locationCode")
-    , @NamedQuery(name = "Canadalocation.findByCountry", query = "SELECT c FROM Canadalocation c WHERE c.country = :country")
-    , @NamedQuery(name = "Canadalocation.findByRegion", query = "SELECT c FROM Canadalocation c WHERE c.region = :region")})
-public class Canadalocation implements Serializable {
+    @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l")
+    , @NamedQuery(name = "Location.findByLocationCode", query = "SELECT l FROM Location l WHERE l.locationCode = :locationCode")
+    , @NamedQuery(name = "Location.findByCountry", query = "SELECT l FROM Location l WHERE l.country = :country")
+    , @NamedQuery(name = "Location.findByRegion", query = "SELECT l FROM Location l WHERE l.region = :region")})
+public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,16 +46,18 @@ public class Canadalocation implements Serializable {
     @Column(name = "region")
     private String region;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationCode", fetch = FetchType.EAGER)
-    private List<Canadataxrate> canadataxrateList;
+    private List<CanadaTaxRate> canadaTaxRateList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationCode", fetch = FetchType.EAGER)
+    private List<UsTaxRate> usTaxRateList;
 
-    public Canadalocation() {
+    public Location() {
     }
 
-    public Canadalocation(String locationCode) {
+    public Location(String locationCode) {
         this.locationCode = locationCode;
     }
 
-    public Canadalocation(String locationCode, String country, String region) {
+    public Location(String locationCode, String country, String region) {
         this.locationCode = locationCode;
         this.country = country;
         this.region = region;
@@ -86,12 +88,21 @@ public class Canadalocation implements Serializable {
     }
 
     @XmlTransient
-    public List<Canadataxrate> getCanadataxrateList() {
-        return canadataxrateList;
+    public List<CanadaTaxRate> getCanadaTaxRateList() {
+        return canadaTaxRateList;
     }
 
-    public void setCanadataxrateList(List<Canadataxrate> canadataxrateList) {
-        this.canadataxrateList = canadataxrateList;
+    public void setCanadaTaxRateList(List<CanadaTaxRate> canadaTaxRateList) {
+        this.canadaTaxRateList = canadaTaxRateList;
+    }
+
+    @XmlTransient
+    public List<UsTaxRate> getUsTaxRateList() {
+        return usTaxRateList;
+    }
+
+    public void setUsTaxRateList(List<UsTaxRate> usTaxRateList) {
+        this.usTaxRateList = usTaxRateList;
     }
 
     @Override
@@ -104,10 +115,10 @@ public class Canadalocation implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Canadalocation)) {
+        if (!(object instanceof Location)) {
             return false;
         }
-        Canadalocation other = (Canadalocation) object;
+        Location other = (Location) object;
         if ((this.locationCode == null && other.locationCode != null) || (this.locationCode != null && !this.locationCode.equals(other.locationCode))) {
             return false;
         }
@@ -116,7 +127,7 @@ public class Canadalocation implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Canadalocation[ locationCode=" + locationCode + " ]";
+        return "models.Location[ locationCode=" + locationCode + " ]";
     }
     
 }

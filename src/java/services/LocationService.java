@@ -5,9 +5,9 @@
  */
 package services;
 import dataaccess.LocationDB;
-import models.Canadalocation;
+
 import java.util.List;
-import models.Uslocation;
+import models.Location;
 /**
  *
  * @author Kyle Helmer
@@ -17,35 +17,35 @@ public class LocationService {
     
     private LocationDB locDB = new LocationDB();
     
-       //Canada related methods 
     
-    public List<Canadalocation> getAllCan() throws Exception{
+    
+    public List<Location> getAllCan() throws Exception{
         
         return locDB.getAllCan();
     }
     
-    public Canadalocation getCan(String locationCode){
+    public Location getCan(String locationCode){
         return locDB.getCan(locationCode);
     }
     
-     public List<Canadalocation> getAllCanRegion(String region) throws Exception{
+     public List<Location> getAllCanRegion(String region) throws Exception{
         return locDB.getAllCanRegion(region);
     }
     
     public void insertCan(String locationCode, String country, String region){
-        Canadalocation canLoc = new Canadalocation(locationCode, country, region);
+        Location canLoc = new Location(locationCode, country, region);
         locDB.insertCan(canLoc);
     }
     
     public void updateCan(String locationCode, String country, String region){
-        Canadalocation canLoc = locDB.getCan(locationCode);
+        Location canLoc = locDB.getCan(locationCode);
         canLoc.setCountry(country);
         canLoc.setRegion(region);
         locDB.updateCan(canLoc);   
     }
     
     public void deleteCan(String locationCode){
-        Canadalocation canLoc = locDB.getCan(locationCode);
+        Location canLoc = locDB.getCan(locationCode);
         locDB.deleteCan(canLoc);
     }
     

@@ -3,7 +3,7 @@ package services;
 import dataaccess.LocationDB;
 import dataaccess.TaxRateDB;
 import java.util.List;
-import models.Canadalocation;
+import models.Location;
 import models.Canadataxrate;
 
 /**

@@ -9,8 +9,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import models.Canadalocation;
-import models.Uslocation;
+import models.Location;
+
 
 /**
  *
@@ -24,11 +24,11 @@ public class LocationDB {
 
        //Canada related methods 
     
-    public List<Canadalocation> getAllCan() throws Exception {
+    public List<Location> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            List<Canadalocation> canLocations = em.createNamedQuery("Canadalocation.findAll", Canadalocation.class).getResultList();
+            List<Location> canLocations = em.createNamedQuery("Location.findAll", Location.class).getResultList();
             return canLocations;
 
         } finally {
@@ -37,25 +37,25 @@ public class LocationDB {
 
     }
 
-    public Canadalocation getCan(String locationCode) {
+    public Location getLoc(String locationCode) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            Canadalocation can = em.find(Canadalocation.class, locationCode);
+            Location can = em.find(Location.class, locationCode);
             return can;
         } finally {
             em.close();
         }
     }
 
-    public List<Canadalocation> getAllCanRegion(String region) throws Exception {
+    public List<Location> getAllRegion(String region) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            Query queryCanLocByregion = em.createNamedQuery("Canadalocation.findByRegion");
+            Query queryCanLocByregion = em.createNamedQuery("Location.findByRegion");
             queryCanLocByregion.setParameter("region", region);
-            List<Canadalocation> canLocations = queryCanLocByregion.getResultList();
+            List<Location> canLocations = queryCanLocByregion.getResultList();
             return canLocations;
         } finally {
             em.close();
@@ -63,7 +63,7 @@ public class LocationDB {
 
     }
 
-    public void insertCan(Canadalocation canLoc) {
+    public void insertLoc(Location canLoc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -80,7 +80,7 @@ public class LocationDB {
 
     }
 
-    public void updateCan(Canadalocation canLoc) {
+    public void updateLoc(Location canLoc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -95,7 +95,7 @@ public class LocationDB {
 
     }
 
-    public void deleteCan(Canadalocation canLoc) {
+    public void deleteLoc(Location canLoc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -110,92 +110,6 @@ public class LocationDB {
 
     }
     
-       //Us related methods 
-    
-    public List<Uslocation> getAllUs() throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-
-        try {
-            List<Uslocation> usLocations = em.createNamedQuery("Uslocation.findAll", Uslocation.class).getResultList();
-            return usLocations;
-
-        } finally {
-            em.close();
-        }
-
-    }
-
-    public Uslocation getUs(String zipCode) {
-
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-
-        try {
-            Uslocation us = em.find(Uslocation.class, zipCode);
-            return us;
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<Uslocation> getAllUsState(String state) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-
-        try {
-            Query queryUsLocByregion = em.createNamedQuery("Uslocation.findByState");
-            queryUsLocByregion.setParameter("state", state);
-            List<Uslocation> usLocations = queryUsLocByregion.getResultList();
-            return usLocations;
-        } finally {
-            em.close();
-        }
-
-    }
-
-    public void insertUs(Uslocation usLoc) {
-
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-
-        try {
-
-            trans.begin();
-            em.persist(usLoc);
-            trans.commit();
-
-        } finally {
-            em.close();
-        }
-
-    }
-
-    public void updateUs(Uslocation usLoc) {
-
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-
-        try {
-            trans.begin();
-            em.persist(usLoc);
-            trans.commit();
-        } finally {
-            em.close();
-        }
-
-    }
-
-    public void deleteUs(Uslocation usLoc) {
-
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-
-        try {
-            trans.begin();
-            em.remove(em.merge(usLoc));
-            trans.commit();
-        } finally {
-            em.close();
-        }
-
-    }
+       
 
 }

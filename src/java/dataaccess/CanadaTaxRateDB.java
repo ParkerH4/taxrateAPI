@@ -23,7 +23,6 @@ public class CanadaTaxRateDB {
             Location Loc = (Location) queryCanLocCode.getSingleResult();
 
             CanadaTaxRate canTaxRate = Loc.getCanadaTaxRateList().get(0);
-            int a = 1;
             return canTaxRate;
 
         } finally {

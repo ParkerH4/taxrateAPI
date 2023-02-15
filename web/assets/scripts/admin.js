@@ -8,36 +8,34 @@ function showForm(formID) {
 
 function showSearchForm() {
     showForm("searchForm");
-    showForm("searchTable");
+    showForm("editButton");
     
-    hideForm("addForm");
-    hideForm("editForm");
     hideForm("deleteForm");
+    hideForm("addForm");
 }
 
 function showAddForm() {
     showForm("addForm");
     
     hideForm("searchForm");
-    hideForm("searchTable");
     hideForm("editForm");
+    hideForm("editButton");
     hideForm("deleteForm");
 }
 
 function showEditForm() {
     showForm("editForm");
-    
-    hideForm("searchForm");
-    hideForm("searchTable");
+    showForm("searchForm");
+
     hideForm("addForm");
     hideForm("deleteForm");
 }
 
 function showDeleteForm() {
     showForm("deleteForm");
-    
+
     hideForm("searchForm");
-    hideForm("searchTable");
     hideForm("addForm");
     hideForm("editForm");
+    hideForm("editButton");
 }

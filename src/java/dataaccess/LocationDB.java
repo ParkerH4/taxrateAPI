@@ -87,7 +87,7 @@ public class LocationDB {
 
         try {
             trans.begin();
-            em.persist(loc);
+            em.merge(loc);
             trans.commit();
         } catch (Exception e) {
             trans.rollback();

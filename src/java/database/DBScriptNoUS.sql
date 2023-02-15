@@ -58,6 +58,7 @@ INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('AdminAlpha','alpha
 INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('AdminBeta','beta', 1); 
 INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('AdminOmega','omega', 1); 
 INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('test','a', 1); 
+INSERT INTO `user` (`username`,`password`,`role_id`) VALUES ('a','a', 1); 
 
 
 INSERT INTO `location` VALUES ('V3G','CAN','BC');

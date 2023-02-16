@@ -17,6 +17,7 @@ public class TaxRateService {
     private CanadaTaxRateDB canTaxDB = new CanadaTaxRateDB();
     private UsTaxRateDB usTaxDB = new UsTaxRateDB();
     private LocationDB locDB = new LocationDB();
+    private LocationService  ls = new LocationService();
 
     //Canada tax rates
     public CanadaTaxRate getCan(String locationCode) throws Exception {
@@ -35,12 +36,16 @@ public class TaxRateService {
         double parseHst = Double.parseDouble(hst);
         double parsePst = Double.parseDouble(pst);
 
-        Location newLoc = new Location(locationCode, country, region);
-        locDB.insertLoc(newLoc);
-       
+        ls.insertLoc(locationCode, country, region);
+        
+        Location newLoc = ls.getLoc(locationCode);
+        
         CanadaTaxRate canTaxRate = new CanadaTaxRate(0, parseGst, parsePst, parseHst);
         canTaxRate.setLocation(newLoc);
-
+        
+        newLoc.getCanadaTaxRateList().add(canTaxRate);
+        
+        locDB.updateLoc(newLoc);
         canTaxDB.insertCan(canTaxRate);
     }
 
@@ -49,7 +54,7 @@ public class TaxRateService {
         Location canLoc = locDB.getLoc(locationCode);
         CanadaTaxRate canTaxRate = canTaxDB.getCan(locationCode);
         
-        canLoc.getCanadaTaxRateList().remove(canTaxRate);
+        canLoc.getCanadaTaxRateList().clear();
         
         canTaxDB.deleteCan(canTaxRate);
         locDB.deleteLoc(canLoc);
@@ -66,12 +71,14 @@ public class TaxRateService {
         canLoc.setRegion(region);
         
         CanadaTaxRate canTaxRate = (CanadaTaxRate) canTaxDB.getCan(locationCode);
-
+        
         canTaxRate.setGst(parseGst);
         canTaxRate.setPst(parsePst);
         canTaxRate.setHst(parseHst);
         
         canTaxDB.updateCan(canTaxRate);
+        canLoc.getCanadaTaxRateList().clear();
+        canLoc.getCanadaTaxRateList().add(canTaxRate);
         locDB.updateLoc(canLoc);
     }
     

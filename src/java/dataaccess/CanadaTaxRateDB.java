@@ -13,7 +13,7 @@ import models.CanadaTaxRate;
  */
 public class CanadaTaxRateDB {
 
-    public CanadaTaxRate getCan(String locationCode){
+    public CanadaTaxRate getCan(String locationCode) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -30,7 +30,7 @@ public class CanadaTaxRateDB {
         }
     }
 
-    public List<CanadaTaxRate> getAllCan()  {
+    public List<CanadaTaxRate> getAllCan() {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -44,19 +44,21 @@ public class CanadaTaxRateDB {
         }
     }
 
-    public void insertCan(CanadaTaxRate canTaxRate)  {
+    public void insertCan(CanadaTaxRate canTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction tran = em.getTransaction();
 
         try {
-            
+
             LocationDB locDB = new LocationDB();
             Location loc = locDB.getLoc(canTaxRate.getLocation().getLocationCode());
 
             tran.begin();
-            em.persist(canTaxRate);
             em.merge(loc);
+
+            em.persist(canTaxRate);
+
             tran.commit();
 
         } catch (Exception e) {

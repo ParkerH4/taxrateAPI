@@ -5,10 +5,7 @@
  */
 package services;
 import dataaccess.LocationDB;
-import java.util.ArrayList;
-
 import java.util.List;
-import models.CanadaTaxRate;
 import models.Location;
 /**
  *
@@ -36,8 +33,6 @@ public class LocationService {
     
     public void insertLoc(String locationCode, String country, String region){
         Location loc = new Location(locationCode, country, region);
-        ArrayList<CanadaTaxRate> list = new ArrayList<>();
-        loc.setCanadaTaxRateList(list);
         locDB.insertLoc(loc);
     }
     

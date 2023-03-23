@@ -1,5 +1,6 @@
 package dataaccess;
 
+import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -61,7 +62,8 @@ public class CanadaTaxRateDB {
 
             tran.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();
@@ -79,7 +81,8 @@ public class CanadaTaxRateDB {
             em.remove(em.merge(canTaxRate));
             tran.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();
@@ -97,7 +100,8 @@ public class CanadaTaxRateDB {
             em.merge(canTaxRate);
             tran.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();

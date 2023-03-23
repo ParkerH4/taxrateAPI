@@ -57,7 +57,8 @@ public class UserDB {
             em.merge(role);
             tran.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();
@@ -79,7 +80,8 @@ public class UserDB {
             em.merge(role);
             tran.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();
@@ -97,7 +99,8 @@ public class UserDB {
             em.merge(user);
             tran.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();

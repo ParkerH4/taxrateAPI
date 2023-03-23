@@ -72,7 +72,8 @@ public class LocationDB {
             em.persist(loc);
             trans.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             trans.rollback();
         } finally {
             em.close();
@@ -89,7 +90,9 @@ public class LocationDB {
             trans.begin();
             em.merge(loc);
             trans.commit();
-        } catch (Exception e) {
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
             trans.rollback();
         } finally {
             em.close();
@@ -106,9 +109,10 @@ public class LocationDB {
             trans.begin();
             em.remove(em.merge(loc));
             trans.commit();
-        } catch (Exception e) {
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
             trans.rollback();
-        } finally {
             em.close();
         }
 

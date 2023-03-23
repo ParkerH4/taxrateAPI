@@ -56,7 +56,8 @@ public class UsTaxRateDB {
             em.persist(usTaxRate);
             tran.commit();
             
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();
@@ -74,7 +75,8 @@ public class UsTaxRateDB {
             em.remove(em.merge(usTaxRate));
             tran.commit();
             
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();
@@ -92,7 +94,8 @@ public class UsTaxRateDB {
             em.merge(usTaxRate);
             tran.commit();
             
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             tran.rollback();
         } finally {
             em.close();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package viewmodels;
 
 import models.CanadaTaxRate;
@@ -82,7 +77,7 @@ public class CanadaTaxRateView {
 
     @Override
     public String toString() {
-        return "CanadaTaxRateView{" + "taxRateId=" + taxRateId + ", gst=" + gst + ", pst=" + pst + ", hst=" + hst + ", province=" + province + ", locationCode=" + locationCode + '}';
+        return "{\"Canada Tax Rate\": [" + "\"TaxRateId\":" + taxRateId + ", \"gst\":" + gst + ", \"pst\":" + pst + ", \"hst\":" + hst + ", \"province\":" + province + ", \"locationCode\":" + locationCode + "]";
     }
 
   

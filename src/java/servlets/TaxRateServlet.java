@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import com.google.gson.Gson;
@@ -16,43 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.CanadaTaxRate;
+import models.UsTaxRate;
 import services.TaxRateService;
 import viewmodels.CanadaTaxRateView;
+import viewmodels.UsTaxRateView;
 
 public class TaxRateServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        //Roughly implemented. Works as intended with 0 validation 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        Gson gson = new Gson();
-        TaxRateService trs = new TaxRateService();
-        String rate = request.getParameter("rate");
-
-        try {
-            CanadaTaxRate can = trs.getCan(rate);
-
-            CanadaTaxRateView canView = new CanadaTaxRateView(can);
-
-            String str = gson.toJson(canView);
-            response.getWriter().write(str);
-
-        } catch (Exception ex) {
-            Logger.getLogger(TaxRateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods.">
     /**
@@ -66,6 +30,33 @@ public class TaxRateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            Gson gson = new Gson();
+            TaxRateService trs = new TaxRateService();
+            String locationCode = request.getParameter("locationCode");
+            locationCode = formatLocationCode(locationCode);
+            System.out.println("LOC CODE IN TAX RATE SERVLET: " + locationCode);
+            //Canada tax rate
+            if (isCanCode(locationCode)) {
+                CanadaTaxRate canRate = trs.getCan(locationCode);
+                CanadaTaxRateView canView = new CanadaTaxRateView(canRate);
+                String str = gson.toJson(canView);
+                response.getWriter().write(str);
+
+            //US tax rate
+            } else if (isUSCode(locationCode)) {
+                UsTaxRate usRate = trs.getUs(locationCode);
+                UsTaxRateView usView = new UsTaxRateView(usRate);
+                String str = gson.toJson(usView);
+                response.getWriter().write(str);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TaxRateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

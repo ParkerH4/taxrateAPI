@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package servlets;
 
 import io.jsonwebtoken.Jwts;
@@ -17,16 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.User;
-import static services.AuthService.generateRSAKeyPair;
+import services.AuthService;
+
 import services.UserService;
 
 public class AuthServlet extends HttpServlet {
 
     //1 day
     private static final long EXPIRATION_TIME = 86400000;
-    private static final PrivateKey PRIVATE_KEY = generateRSAKeyPair().getPrivate();
-
-
+    private static final PrivateKey PRIVATE_KEY = AuthService.getInstance().getPrivateKey();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -69,7 +64,8 @@ public class AuthServlet extends HttpServlet {
                         .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                         .signWith(PRIVATE_KEY, SignatureAlgorithm.RS256)
                         .compact();
-
+                
+                System.out.println("PUBLIC KEY FROM AUTHSERVLET: " + AuthService.getInstance().getPublicKey());
                 response.setContentType("application/json");
                 response.getWriter().write("{ \"token\": \"" + jwt + "\" }");
 

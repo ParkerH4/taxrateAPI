@@ -6,7 +6,7 @@
     </filter>
     <filter-mapping>
         <filter-name>VerificationFilter</filter-name>
-        <servlet-name>AuthServlet</servlet-name>
+        <servlet-name>TaxRateServlet</servlet-name>
     </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>

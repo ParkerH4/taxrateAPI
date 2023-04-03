@@ -19,15 +19,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static services.AuthService.generateRSAKeyPair;
+import services.AuthService;
+
 
 public class VerificationFilter implements Filter {
 
-    private static final PublicKey PUBLIC_KEY = generateRSAKeyPair().getPublic();
+
+private static final PublicKey PUBLIC_KEY = AuthService.getInstance().getPublicKey();
 
     public VerificationFilter() {
     }
-
+    
     /**
      *
      * @param request The servlet request we are processing
@@ -55,16 +57,17 @@ public class VerificationFilter implements Filter {
                         .setSigningKey(PUBLIC_KEY)
                         .build()
                         .parseClaimsJws(jwt);
-
                 // If the JWT is valid, proceed
                 chain.doFilter(request, response);
             } catch (JwtException e) {
                 // Invalid JWT, return unauthorized status
+                e.printStackTrace();
                 httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 httpRes.getWriter().write("Invalid token");
             }
         } else {
             chain.doFilter(request, response);
+            System.out.println("In the else filter");
         }
     }
 

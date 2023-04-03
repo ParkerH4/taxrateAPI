@@ -4,51 +4,58 @@
  * and open the template in the editor.
  */
 package services;
+
 import dataaccess.LocationDB;
 import java.util.List;
 import models.Location;
+
 /**
  *
  * @author Kyle Helmer
- * 
+ *
  */
 public class LocationService {
-    
+
     private LocationDB locDB = new LocationDB();
-    
-    
-    
-    public List<Location> getAll() throws Exception{
-        
+
+    public List<Location> getAll() throws Exception {
+
         return locDB.getAll();
     }
-    
-    public Location getLoc(String locationCode){
+
+    public Location getLoc(String locationCode) {
         return locDB.getLoc(locationCode);
     }
-    
-     public List<Location> getAllRegion(String region) throws Exception{
+
+    public List<Location> getAllRegion(String region) throws Exception {
         return locDB.getAllRegion(region);
     }
-    
-    public void insertLoc(String locationCode, String country, String region){
+
+    public void insertLoc(String locationCode, String country, String region) {
         Location loc = new Location(locationCode, country, region);
         locDB.insertLoc(loc);
     }
-    
-    public void updateLoc(String locationCode, String country, String region){
+
+    public void updateLoc(String locationCode, String country, String region) {
         Location loc = locDB.getLoc(locationCode);
         loc.setCountry(country);
         loc.setRegion(region);
-        locDB.updateLoc(loc);   
+        locDB.updateLoc(loc);
     }
-    
-    public void deleteLoc(String locationCode){
+
+    public void deleteLoc(String locationCode) {
         Location loc = locDB.getLoc(locationCode);
         locDB.deleteLoc(loc);
     }
-    
-   
-    
-    
+
+    public boolean validLoc(String locationCode) {
+
+        try {
+            locDB.getLoc(locationCode);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

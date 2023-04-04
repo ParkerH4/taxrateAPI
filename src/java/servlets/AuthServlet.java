@@ -50,7 +50,8 @@ public class AuthServlet extends HttpServlet {
                         .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                         .signWith(PRIVATE_KEY, SignatureAlgorithm.RS256)
                         .compact();
-
+                
+                System.out.println("PUBLIC KEY FROM AUTHSERVLET: " + AuthService.getInstance().getPublicKey());
                 response.setContentType("application/json");
                 response.getWriter().write("{ \"token\": \"" + jwt + "\" }");
 

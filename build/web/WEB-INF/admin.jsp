@@ -99,16 +99,21 @@
                 <input type="submit" value="Add Tax Rate To Database" />
             </form>
         </div>
-        
+
         <!-- just for testing the JSON response of our servers -->
         <div>
             <form method="get" action="taxrate">
-        
-            <input type="submit" name="" value="TEST">
-            <input type="hidden" name="rate" value="t3j"> 
-        </form>
+
+                <input type="submit" name="" value="TEST">
+                <input type="hidden" name="rate" value="t3j"> 
+            </form>
         </div>
 
-        <script type="text/javascript" src="./assets/scripts/admin.js"></script>
-    </body>
+
+       
+
+    </div>
+
+    <script type="text/javascript" src="./assets/scripts/admin.js"></script>
+</body>
 </html>

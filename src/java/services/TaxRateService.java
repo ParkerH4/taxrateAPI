@@ -97,12 +97,15 @@ public class TaxRateService {
 
         double parseStateTax = Double.parseDouble(stateTax);
 
-        Location newLoc = new Location(locationCode, country, region);
-        locDB.insertLoc(newLoc);
+        
+        ls.insertLoc(locationCode, country, region);
+        Location newLoc = ls.getLoc(locationCode);
+       
 
         UsTaxRate usTaxRate = new UsTaxRate(0, parseStateTax);
         usTaxRate.setLocation(newLoc);
-
+        
+        locDB.updateLoc(newLoc);
         usTaxDB.insertUs(usTaxRate);
     }
 
@@ -131,6 +134,16 @@ public class TaxRateService {
         
         usTaxDB.updateUs(usTaxRate);
         locDB.updateLoc(usLoc);
+    }
+    
+    public int locCodeChecker(String locationCode){
+        char firstChar = locationCode.charAt(0);    
+        if(Character.isDigit(firstChar)){
+           return 1; 
+        }else{
+            return -1;
+        }
+        
     }
 
 }

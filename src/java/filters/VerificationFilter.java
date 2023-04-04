@@ -27,7 +27,7 @@ public class VerificationFilter implements Filter {
     
     public VerificationFilter() {
     }
-
+    
     /**
      *
      * @param request The servlet request we are processing
@@ -56,12 +56,12 @@ public class VerificationFilter implements Filter {
                         .setSigningKey(PUBLIC_KEY)
                         .build()
                         .parseClaimsJws(jwt);
-
                 // If the JWT is valid, proceed
                 System.out.println("VerificationFilter - JWT is valid, proceed..");
                 chain.doFilter(request, response);
             } catch (JwtException e) {
                 // Invalid JWT, return unauthorized status
+                e.printStackTrace();
                 httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 httpRes.getWriter().write("Invalid token");
                 System.out.println("VerificationFilter - UNAUTHORIZED");

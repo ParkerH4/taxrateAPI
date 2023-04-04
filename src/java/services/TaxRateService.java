@@ -133,17 +133,11 @@ public class TaxRateService {
         usTaxRate.setStateTax(parseStateTax);
         
         usTaxDB.updateUs(usTaxRate);
+        usLoc.getUsTaxRateList().clear();
+        usLoc.getUsTaxRateList().add(usTaxRate);
         locDB.updateLoc(usLoc);
     }
     
-    public int locCodeChecker(String locationCode){
-        char firstChar = locationCode.charAt(0);    
-        if(Character.isDigit(firstChar)){
-           return 1; 
-        }else{
-            return -1;
-        }
-        
-    }
+  
 
 }

@@ -63,8 +63,8 @@ public class AdminServlet extends HttpServlet {
      */
     public boolean isUSCode(String locationCode) {
         // sanitize input
-        
-         if(locationCode == null){
+
+        if (locationCode == null) {
             return false;
         }
         locationCode = locationCode.trim()
@@ -90,7 +90,7 @@ public class AdminServlet extends HttpServlet {
      */
     public boolean isCanCode(String locationCode) {
         // sanitize input
-        if(locationCode == null){
+        if (locationCode == null) {
             return false;
         }
         locationCode = locationCode.toUpperCase()
@@ -124,9 +124,11 @@ public class AdminServlet extends HttpServlet {
             if (isCanCode(searchField)) {
                 canTax = trs.getCan(searchField);
                 request.setAttribute("taxRate", canTax);
+                request.setAttribute("searchedLoc", "canada");
             } else if (isUSCode(searchField)) {
                 usTax = trs.getUs(searchField);
                 request.setAttribute("usTaxRate", usTax);
+                request.setAttribute("searchedLoc", "usa");
             }
         } catch (Exception ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,8 +199,36 @@ public class AdminServlet extends HttpServlet {
                             session.setAttribute("message", "Error updating tax rate");
                             response.sendRedirect("admin");
                             return;
-                        } else {
+                        } else if (isCanCode(editLocationCode)) {
                             trs.updateCan(editCountry, editRegion, editLocationCode, editTaxRate1, editTaxRate2, editTaxRate3);
+                            session.setAttribute("message", "Updated Tax Rate!");
+                        } else if (isUSCode(editLocationCode) && editTaxRate2 == null && editTaxRate3 == null) {
+                            trs.updateUs(editCountry, editRegion, editLocationCode, editTaxRate1);
+                            session.setAttribute("message", "Updated Tax Rate!");
+                        } else {
+
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    response.sendRedirect("admin");
+                    return;
+
+                case "editUs":
+                    try {
+                        String editCountry = request.getParameter("editCountry");
+                        String editRegion = request.getParameter("editRegion");
+                        String editLocationCode = request.getParameter("editLocationCode");
+                        String editTaxRate1 = request.getParameter("editTaxRate1");
+
+                        if (editCountry == null || editRegion == null || editLocationCode == null || editTaxRate1 == null
+                                || editCountry.equals("") || editRegion.equals("") || editLocationCode.equals("") || editTaxRate1.equals("")) {
+                            session.setAttribute("message", "Error updating tax rate");
+                            response.sendRedirect("admin");
+                            return;
+                        } else{
+                            trs.updateUs(editCountry, editRegion, editLocationCode, editTaxRate1);
                             session.setAttribute("message", "Updated Tax Rate!");
                         }
                     } catch (Exception ex) {
@@ -214,46 +244,10 @@ public class AdminServlet extends HttpServlet {
 
                         if (deleteField.equals("")) {
                             session.setAttribute("message", "Null values or empty strings not permitted in the input for deleting a tax rate.");
-                        } else {
+                        } else if (isCanCode(deleteField)) {
                             trs.deleteCan(deleteField);
                             session.setAttribute("message", "Tax rate " + deleteField + " has been deleted.");
-                        }
-                    } catch (Exception ex) {
-                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-                        session.setAttribute("message", "Error deleting tax rate. Exception thrown.");
-                    }
-                }
-
-                case "editUs":
-                    try {
-                        String editCountry = request.getParameter("editCountry");
-                        String editRegion = request.getParameter("editRegion");
-                        String editLocationCode = request.getParameter("editLocationCode");
-                        String editTaxRate1 = request.getParameter("editTaxRate1");
-
-                        if (editCountry == null || editRegion == null || editLocationCode == null || editTaxRate1 == null || editCountry.equals("")
-                                || editRegion.equals("") || editLocationCode.equals("") || editTaxRate1.equals("")) {
-                            session.setAttribute("message", "Error updating tax rate");
-                            response.sendRedirect("admin");
-                            return;
-                        } else {
-                            trs.updateUs(editCountry, editRegion, editLocationCode, editTaxRate1);
-                            session.setAttribute("message", "Updated Tax Rate!");
-                        }
-                    } catch (Exception ex) {
-                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    response.sendRedirect("admin");
-                    return;
-
-                case "deleteUs": {
-                    try {
-                        String deleteField = request.getParameter("deleteFieldUs");
-
-                        if (deleteField.equals("")) {
-                            session.setAttribute("message", "Null values or empty strings not permitted in the input for deleting a tax rate.");
-                        } else {
+                        } else if (isUSCode(deleteField)) {
                             trs.deleteUs(deleteField);
                             session.setAttribute("message", "Tax rate " + deleteField + " has been deleted.");
                         }
@@ -261,22 +255,8 @@ public class AdminServlet extends HttpServlet {
                         Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                         session.setAttribute("message", "Error deleting tax rate. Exception thrown.");
                     }
+                    break;
                 }
-                case "addUs":
-                    if (addCountry == null || addRegion == null || addLocationCode == null || addTaxRate1 == null || addCountry.equals("") || addRegion.equals("") || addLocationCode.equals("") || addTaxRate1.equals("")) {
-                        session.setAttribute("message", "Error adding TaxRate. Null or empty fields in the adding form.");
-                        response.sendRedirect("admin");
-                        return;
-                    } else {
-                        try {
-                            trs.insertUs(addCountry, addRegion, addLocationCode, addTaxRate1);
-                            session.setAttribute("message", "Added Tax Rate!");
-                        } catch (Exception ex) {
-                            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    response.sendRedirect("admin");
-                    return;
 
                 case "cancel":
                     session.setAttribute("message", "Cancelled. Changes were not saved.");

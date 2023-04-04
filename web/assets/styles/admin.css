@@ -1,8 +1,16 @@
 body {
+    margin: auto;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ececec;
+}
+
+#message {
+  margin: 20px;
+  color: grey;
+  font-size: 12px;
 }
 
 h1 {
@@ -11,22 +19,53 @@ h1 {
 
 .header {
     display: flex;
-    margin-bottom: 50px;
+    align-items: center;
+    background-color: #26c1eb;
+    color: white;
+    padding: 20px;
+    margin: 0;
+    width: 100%;
 }
 
 .header h1 {
-    margin-right: 50px;
+    margin: 0;
+    font-size: 45px;
+    font-weight: bold;
+    margin-left: 100px;
+
+}
+
+.header img {
+     width: 400px;
+    height: 100px;
+    margin-left: 20px;
 }
 
 .hidden {
     display: none;
     visibility: hidden;
 }
+#formButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 50px;
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+  background: #26c1eb;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border-radius: 5px;
+  border: 3px solid #72A0C1;
+   background-color: #ececec;
 }
 
 input[type="text"],
@@ -34,24 +73,17 @@ select {
     padding: 10px;
     font-size: 16px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #2E5894;
     border-radius: 5px;
-}
-
-input[type="submit"],
-input[type="button"] {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: lightblue;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    
 }
 
 table {
     width: 100%;
     margin-bottom: 50px;
     border-collapse: collapse;
+    border: 1.5px solid #2E5894;
+    background-color: white;
 }
 
 th,td {
@@ -61,15 +93,40 @@ th,td {
 }
 
 th {
-    background-color: lightgray;
+  background-color: #26c1eb;
+  color: #fff;
 }
 
-td[contenteditable] {
-    background-color: #f2f2f2;
+input[type="text"] {
+  margin: 10px;
+  padding: 5px;
+  font-size: 16px;
 }
 
-img {
-    width: 50%;
-    height: 50%;
-    background-color: black;
+input[type="submit"], input[type="button"] {
+  margin: 10px;
+  padding: 10px;
+  background-color: #7CB9E8;
+  color: #fff;
+  border: 1px solid #2E5894;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  
+}
+
+input[type="submit"]:hover, input[type="button"]:hover {
+ background-color: #26c1eb;
+ 
+}
+
+label {
+    display: block;
+    color:  #26c1eb;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+label + input {
+    margin-bottom: 10px;
 }

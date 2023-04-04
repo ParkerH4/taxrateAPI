@@ -10,26 +10,28 @@
 
     <body onload="">
         <div class="header">
-            <h1>atVenu Tax Rate API</h1>
             <img src="./assets/images/LogoOnBlue.png" />
+            <h1>atVenu Tax Rate API</h1>
         </div>
 
         <div id="message"><b>${message}</b></div>
-        <br />
-
-        <input type="button" onclick="showSearchForm();" value="Search for tax rate" />
-        <br />
-        <input type="button" onclick="showAddForm()" value="Add new tax rate" />
-        <br />
-        <input type="button" onclick="showDeleteForm();" value="Delete a tax rate" />
-        <br />
+       
+        <div id="formButtons">
+            <input type="button" onclick="showSearchForm();" value="Search for tax rate" />
+            <input type="button" onclick="showAddForm()" value="Add new tax rate" />
+            <input type="button" onclick="showDeleteForm();" value="Delete a tax rate" />
+        </div>
 
         <!-- search by location code -->
         <div class="hidden" id="searchForm">
             <form method="get" action="admin">
                 <input type="text" name="searchField" value="" placeholder="Postal or Zip Code" />
                 <input type="submit" onclick="showEditForm();" value="Search" />
+                <br>
+                <input type="hidden" name="action" value="cancel" />
+                <input type="submit" value="Cancel" />
             </form>
+
         </div>
 
         <!-- search table -->
@@ -77,6 +79,8 @@
                 <input type="hidden" name="action" value="delete" />
                 <input type="text" name="deleteField" placeholder="Postal or Zip Code" />
                 <input type="submit" value="Delete Tax Rate" />
+                <input type="hidden" name="action" value="cancel" />
+                <input type="submit" value="Cancel" />
             </form>
         </div>
 
@@ -88,32 +92,26 @@
                     <option value="USA">USA</option>
                 </select>
                 <br />
-                Region: <input type="text" name="addRegion" placeholder="Region" />
-                Postal Code: <input type="text" name="addLocationCode" placeholder="LocationCode" />
-                GST: <input type="text" name="addTaxRate1" placeholder="GST" />
-                PST: <input type="text" name="addTaxRate2" placeholder="PST" />
-                HST: <input type="text" name="addTaxRate3" placeholder="HST" />
+                <label for="region">Region</label>
+                <input type="text" name="addRegion" id=region placeholder="Region" />
+                <label for="locationCode">Location Code</label>
+                <input type="text" name="addLocationCode" id=locationCode placeholder="LocationCode" />
+                <label for="taxRate1">Tax Rate 1</label>
+                <input type="text" name="addTaxRate1" id = taxRate1 placeholder="GST" />
+                <label for="taxRate2">Tax Rate 2</label>
+                <input type="text" name="addTaxRate2" id = taxRate2 placeholder="PST" />
+                <label for="taxRate3">Tax Rate 3</label>
+                <input type="text" name="addTaxRate3" id = taxRate3 placeholder="HST" />
                 <br />
 
                 <input type="hidden" name="action" value="add" />
                 <input type="submit" value="Add Tax Rate To Database" />
+                <!-- cancel button -->
+                <input type="hidden" name="action" value="cancel" />
+                <input type="submit" value="Cancel" />
             </form>
         </div>
 
-        <!-- just for testing the JSON response of our servers -->
-        <div>
-            <form method="get" action="taxrate">
-
-                <input type="submit" name="" value="TEST">
-                <input type="hidden" name="rate" value="t3j"> 
-            </form>
-        </div>
-
-
-       
-
-    </div>
-
-    <script type="text/javascript" src="./assets/scripts/admin.js"></script>
-</body>
+        <script type="text/javascript" src="./assets/scripts/admin.js"></script>
+    </body>
 </html>

@@ -1,28 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 public class AuthService {
 
-    public static KeyPair generateRSAKeyPair() {
+    private static AuthService instance;
+    private KeyPair keyPair;
+
+    private AuthService() {
         try {
             KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
             kpg.initialize(2048);
-            return kpg.generateKeyPair();
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println("No such algorithm.");
-            Logger.getLogger(AuthService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            keyPair = kpg.generateKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Unable to initialize AuthService", e);
         }
     }
 
+    // singleton constructor
+    public static synchronized AuthService getInstance() {
+        if (instance == null) {
+            instance = new AuthService();
+        }
+        return instance;
+    }
+
+    public PrivateKey getPrivateKey() {
+        return keyPair.getPrivate();
+    }
+
+    public PublicKey getPublicKey() {
+        return keyPair.getPublic();
+    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package viewmodels;
 
 import models.CanadaTaxRate;
@@ -18,7 +13,8 @@ public class CanadaTaxRateView {
     private double pst;
     private double hst;
     private String province;
-    private String locationCode; 
+    private String country;
+    private String locationCode;
 
     public CanadaTaxRateView() {
     }
@@ -29,6 +25,7 @@ public class CanadaTaxRateView {
         pst = taxRate.getPst();
         hst = taxRate.getHst();
         province = taxRate.getLocation().getRegion();
+        country = "Canada";
         locationCode = taxRate.getLocation().getLocationCode();
     }
 
@@ -71,6 +68,10 @@ public class CanadaTaxRateView {
     public void setProvince(String province) {
         this.province = province;
     }
+    
+    public String getCountry() {
+        return country;
+    }
 
     public String getLocationCode() {
         return locationCode;
@@ -82,9 +83,9 @@ public class CanadaTaxRateView {
 
     @Override
     public String toString() {
-        return "CanadaTaxRateView{" + "taxRateId=" + taxRateId + ", gst=" + gst + ", pst=" + pst + ", hst=" + hst + ", province=" + province + ", locationCode=" + locationCode + '}';
+        return "CanadaTaxRateView{" + "taxRateId=" + taxRateId 
+                + ", gst=" + gst + ", pst=" + pst + ", hst=" + hst 
+                + ", province=" + province + ", country=" + country
+                + ", locationCode=" + locationCode + '}';
     }
-
-  
-
 }

@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +62,10 @@ public class AdminServlet extends HttpServlet {
      */
     public boolean isUSCode(String locationCode) {
         // sanitize input
+        
+         if(locationCode == null){
+            return false;
+        }
         locationCode = locationCode.trim()
                 // get rid of all whitespace
                 .replaceAll("\\s+", "");
@@ -86,6 +89,9 @@ public class AdminServlet extends HttpServlet {
      */
     public boolean isCanCode(String locationCode) {
         // sanitize input
+        if(locationCode == null){
+            return false;
+        }
         locationCode = locationCode.toUpperCase()
                 .trim()
                 // get rid of all whitespace

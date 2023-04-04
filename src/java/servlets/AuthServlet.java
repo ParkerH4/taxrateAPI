@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import io.jsonwebtoken.Jwts;
@@ -17,30 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.User;
-import static services.AuthService.generateRSAKeyPair;
+import services.AuthService;
 import services.UserService;
 
 public class AuthServlet extends HttpServlet {
 
     //1 day
     private static final long EXPIRATION_TIME = 86400000;
-    private static final PrivateKey PRIVATE_KEY = generateRSAKeyPair().getPrivate();
+    private static final PrivateKey PRIVATE_KEY = AuthService.getInstance().getPrivateKey();
 
 
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

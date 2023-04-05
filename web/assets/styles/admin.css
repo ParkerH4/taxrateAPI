@@ -8,9 +8,9 @@ body {
 }
 
 #message {
-  margin: 20px;
-  color: grey;
-  font-size: 12px;
+    margin: 20px;
+    color: grey;
+    font-size: 12px;
 }
 
 h1 {
@@ -36,7 +36,7 @@ h1 {
 }
 
 .header img {
-     width: 400px;
+    width: 400px;
     height: 100px;
     margin-left: 20px;
 }
@@ -46,26 +46,26 @@ h1 {
     visibility: hidden;
 }
 #formButtons {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 form {
-   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 40px;
-  padding-top: 20px;
-  background: #26c1eb;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-  border-radius: 5px;
-  border: 3px solid #72A0C1;
-   background-color: #ececec;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    background: #26c1eb;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    border-radius: 5px;
+    border: 3px solid #72A0C1;
+    background-color: #ececec;
 }
 
 input[type="text"],
@@ -75,7 +75,7 @@ select {
     margin-bottom: 20px;
     border: 1px solid #2E5894;
     border-radius: 5px;
-    
+
 }
 
 table {
@@ -93,31 +93,31 @@ th,td {
 }
 
 th {
-  background-color: #26c1eb;
-  color: #fff;
+    background-color: #26c1eb;
+    color: #fff;
 }
 
 input[type="text"] {
-  margin: 10px;
-  padding: 5px;
-  font-size: 16px;
+    margin: 10px;
+    padding: 5px;
+    font-size: 16px;
 }
 
 input[type="submit"], input[type="button"] {
-  margin: 10px;
-  padding: 10px;
-  background-color: #7CB9E8;
-  color: #fff;
-  border: 1px solid #2E5894;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  
+    margin: 10px;
+    padding: 10px;
+    background-color: #7CB9E8;
+    color: #fff;
+    border: 1px solid #2E5894;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+
 }
 
 input[type="submit"]:hover, input[type="button"]:hover {
- background-color: #26c1eb;
- 
+    background-color: #26c1eb;
+
 }
 
 label {
@@ -129,4 +129,27 @@ label {
 
 label + input {
     margin-bottom: 10px;
+}
+
+/*.formCan {
+    display: none;
+}
+
+ show the selected div 
+.formCan.show {
+    display: block;
+}
+
+.formUs {
+    display: none;
+}
+
+ show the selected div 
+.formUs.show {
+    display: block;
+}*/
+
+
+#editButton {
+    padding: 5px;
 }

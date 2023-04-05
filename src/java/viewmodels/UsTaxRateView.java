@@ -17,6 +17,7 @@ public class UsTaxRateView {
     private double stateTax;
     private String state;
     private String zipCode;
+    private String country;
 
     public UsTaxRateView() {
     }
@@ -26,6 +27,7 @@ public class UsTaxRateView {
         stateTax = taxRate.getStateTax();
         zipCode = taxRate.getLocation().getLocationCode();
         state = taxRate.getLocation().getRegion();
+        country = "US";
     }
 
     public int getTaxRateId() {
@@ -59,10 +61,17 @@ public class UsTaxRateView {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+    
+    public String getCountry() {
+        return country;
+    }
 
     @Override
     public String toString() {
-        return "UsTaxRateView{" + "taxRateId=" + taxRateId + ", stateTax=" + stateTax + ", state=" + state + ", zipCode=" + zipCode + '}';
+        return "UsTaxRateView{" + "taxRateId=" + taxRateId 
+                + ", stateTax=" + stateTax + ", state=" 
+                + state + ", zipCode=" + zipCode + ", country=" + country
+                +'}';
     }
 
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.util.List;
@@ -12,16 +7,18 @@ import javax.persistence.Query;
 import models.Location;
 
 /**
- *
- * @author Kyle Helmer
+ * LocationDB class is used to support CRUD functionality on the location table in the taxrate database.
+ * 
  */
 public class LocationDB {
 
     public LocationDB() {
-
     }
 
-    //Canada related methods 
+    /**
+     * 
+     * @return A List of all Location objects from the database.
+     */
     public List<Location> getAll() {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -35,6 +32,11 @@ public class LocationDB {
 
     }
 
+    /**
+     * 
+     * @param locationCode The string that represents a US ZipCode or Canada Postal Code
+     * @return A location object retrieved from the database.
+     */
     public Location getLoc(String locationCode) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -47,6 +49,11 @@ public class LocationDB {
         }
     }
 
+    /**
+     * 
+     * @param region The internationally approved alpha code, which is a representation of a US State or Canada Province.
+     * @return the List of all location objects associated with the alpha code
+     */
     public List<Location> getAllRegion(String region) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -61,6 +68,10 @@ public class LocationDB {
 
     }
 
+    /**
+     * 
+     * @param loc Location object that will be inserted into the Location table in the taxratedb database.
+     */
     public void insertLoc(Location loc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -81,6 +92,10 @@ public class LocationDB {
 
     }
 
+    /**
+     * 
+     * @param loc Location object that will be updated in the Location table of the taxratedb database.
+     */
     public void updateLoc(Location loc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -100,6 +115,10 @@ public class LocationDB {
 
     }
 
+    /**
+     * 
+     * @param loc Location object that will be removed from the Location table of the taxratedb database.
+     */
     public void deleteLoc(Location loc) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

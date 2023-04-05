@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
- * @author Kyle Helmer
+ * DBUtil class that contains a singleton EntityManagerFactory for EntityManager creation, which uses and updates persistence entities.
  * 
  */
 public class DBUtil {
@@ -18,6 +12,10 @@ public class DBUtil {
     private static final EntityManagerFactory EMF
             = Persistence.createEntityManagerFactory("taxRatePU2");
 
+    /**
+     * 
+     * @return EntityManagerFactory for use throughout the application.
+     */
     public static EntityManagerFactory getEmFactory() {
         return EMF;
     }

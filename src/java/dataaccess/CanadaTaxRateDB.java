@@ -8,11 +8,16 @@ import models.Location;
 import models.CanadaTaxRate;
 
 /**
- *
- * @author William Lau
+ * CanadaTaxRateDB class supports CRUD functionality on the CanadaTaxRate database table.
+ * 
  */
 public class CanadaTaxRateDB {
 
+    /**
+     * 
+     * @param locationCode location code string that represents a Canada Postal Code
+     * @return CanadaTaxRate object retrieved using the locationCode.
+     */
     public CanadaTaxRate getCan(String locationCode) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -30,6 +35,10 @@ public class CanadaTaxRateDB {
         }
     }
 
+    /**
+     * 
+     * @return a List of CanadaTaxRate objects.
+     */
     public List<CanadaTaxRate> getAllCan() {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -44,6 +53,10 @@ public class CanadaTaxRateDB {
         }
     }
 
+    /**
+     * 
+     * @param canTaxRate A CanadaTaxRate object that will be inserted into the DB.
+     */
     public void insertCan(CanadaTaxRate canTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -69,6 +82,10 @@ public class CanadaTaxRateDB {
         }
     }
 
+    /**
+     * 
+     * @param canTaxRate The CanadaTaxRate that will be deleted from the DB.
+     */
     public void deleteCan(CanadaTaxRate canTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -87,7 +104,11 @@ public class CanadaTaxRateDB {
             em.close();
         }
     }
-
+    
+    /**
+     * 
+     * @param canTaxRate The CanadaTaxRate object that will be updated in the database.
+     */
     public void updateCan(CanadaTaxRate canTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

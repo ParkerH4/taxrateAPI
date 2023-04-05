@@ -184,6 +184,23 @@ public class AdminServlet extends HttpServlet {
                     }
                     response.sendRedirect("admin");
                     return;
+                    
+                     case "addUs":
+                    if (addCountry == null || addRegion == null || addLocationCode == null || addTaxRate1 == null
+                            || addCountry.equals("") || addRegion.equals("") || addLocationCode.equals("") || addTaxRate1.equals("")) {
+                        session.setAttribute("message", "Error adding TaxRate. Null or empty fields in the adding form.");
+                        response.sendRedirect("admin");
+                        return;
+                    } else {
+                        try {
+                            trs.insertUs(addCountry, addRegion, addLocationCode, addTaxRate1);
+                            session.setAttribute("message", "Added Tax Rate!");
+                        } catch (Exception ex) {
+                            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    response.sendRedirect("admin");
+                    return;
 
                 case "edit":
                     try {

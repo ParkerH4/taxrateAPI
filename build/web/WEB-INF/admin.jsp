@@ -59,7 +59,7 @@
                             <td name="searchTaxRate2">${taxRate.getPst()}</td>
                             <td name="searchTaxRate3">${taxRate.getHst()}</td>
                         </tr>
-                        <input type="button" id="editButton" onclick="showEditForm();" value="Edit a tax rate" />
+                        <input type="button" id="editButton" onclick="showEditForm();" value="Edit" />
                         <br />
                     </table>
 
@@ -74,6 +74,8 @@
                             <input type="text" name="editTaxRate3"  value="${taxRate.getHst()}"><br>
                             <input type="hidden" name="action" value="edit" />
                             <input type="submit" value="Save Changes" />
+                            <input type="hidden" name="action" value="cancel" />
+                            <input type="submit" value="Cancel" />
                         </form>
                     </div>
                 </div>
@@ -98,7 +100,7 @@
                             <td name="searchLocationCode">${usTaxRate.getLocation().getLocationCode()}</td>
                             <td name="searchTaxRate1">${usTaxRate.getStateTax()}</td>
                         </tr>
-                        <input type="button" id="editButton" onclick="showEditForm();" value="Edit a tax rate" />
+                        <input type="button" id="editButton" onclick="showEditForm();" value="Edit" />
                         <br />
                     </table>
 
@@ -111,6 +113,8 @@
                             <input type="text" name="editTaxRate1"  value="${usTaxRate.getStateTax()}"><br>
                             <input type="hidden" name="action" value="editUs" />
                             <input type="submit" value="Save Changes" />
+                            <input type="hidden" name="action" value="cancel" />
+                            <input type="submit" value="Cancel" />
                         </form>
                     </div>
                 </div>
@@ -131,34 +135,16 @@
 
     <%-- form to add new tax rate to DB --%>
     <div class="hidden" id="addForm">
-        <form method="post" action="admin">
-            <select name="addCountry">
+            <select id="addSelect" name="addCountry">
+                <option value="">---</option>
                 <option value="CAN">Canada</option>
                 <option value="USA">USA</option>
             </select>
             <br />
-            <label for="region">Region</label>
-            <input type="text" name="addRegion" id=region placeholder="Region" />
-            <label for="locationCode">Location Code</label>
-            <input type="text" name="addLocationCode" id=locationCode placeholder="LocationCode" />
-            <label for="taxRate1">Tax Rate 1</label>
-            <input type="text" name="addTaxRate1" id = taxRate1 placeholder="GST" />
-            <label for="taxRate2">Tax Rate 2</label>
-            <input type="text" name="addTaxRate2" id = taxRate2 placeholder="PST" />
-            <label for="taxRate3">Tax Rate 3</label>
-            <input type="text" name="addTaxRate3" id = taxRate3 placeholder="HST" />
-            <br />
-
-            <input type="hidden" name="action" value="add" />
-            <input type="submit" value="Add Tax Rate To Database" />
-            <!-- cancel button -->
-            <input type="hidden" name="action" value="cancel" />
-            <input type="submit" value="Cancel" />
-        </form>
+            <!--Where JS will write the ADD FORM depending on what the user selects-->
+            <div id="addForm"></div>
     </div>
 
-</div>
-
-<script type="text/javascript" src="./assets/scripts/admin.js"></script>
+    <script type="text/javascript" src="./assets/scripts/admin.js"></script>
 </body>
 </html>

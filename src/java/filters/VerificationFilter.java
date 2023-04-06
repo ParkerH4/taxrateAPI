@@ -50,8 +50,6 @@ public class VerificationFilter implements Filter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String jwt = authHeader.substring(7);
-            System.out.println("VerificationFilter - JWT before verification: " + jwt);
-
             try {
                 // Verify the JWT using the public key
                 Jws<Claims> jws = Jwts.parserBuilder()
@@ -59,19 +57,14 @@ public class VerificationFilter implements Filter {
                         .build()
                         .parseClaimsJws(jwt);
                 // If the JWT is valid, proceed
-                System.out.println("VerificationFilter - JWT is valid, proceed..");
                 chain.doFilter(request, response);
             } catch (JwtException e) {
                 // Invalid JWT, return unauthorized status
-                e.printStackTrace();
                 httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                httpRes.getWriter().write("Invalid token");
-                System.out.println("VerificationFilter - UNAUTHORIZED");
-
+                httpRes.getWriter().write("Invalid token.");
             }
         } else {
-            chain.doFilter(request, response);
-            System.out.println("VerificationFilter - In the else..");
+            httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 

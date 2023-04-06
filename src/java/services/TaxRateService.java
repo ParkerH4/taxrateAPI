@@ -167,7 +167,9 @@ public class TaxRateService {
 
         UsTaxRate usTaxRate = new UsTaxRate(0, parseStateTax);
         usTaxRate.setLocation(newLoc);
-
+        
+        newLoc.getUsTaxRateList().add(usTaxRate);
+        
         locDB.updateLoc(newLoc);
         usTaxDB.insertUs(usTaxRate);
     }

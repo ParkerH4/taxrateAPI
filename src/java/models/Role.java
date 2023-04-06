@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import java.io.Serializable;
@@ -21,8 +16,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author Kyle Helmer
+ * Role is an entity class representing a role record in the role table. This
+ * class provides mapping and persistence for the role data in the database and
+ * includes associated properties, constructors, and methods for accessing and
+ * manipulating the role data.
  */
 @Entity
 @Table(name = "role")
@@ -44,43 +41,93 @@ public class Role implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId", fetch = FetchType.EAGER)
     private List<User> userList;
 
+    /**
+     * Initializes a new instance of the Role class with no arguments.
+     */
     public Role() {
     }
 
+    /**
+     * Initializes a new instance of the Role class with the specified role ID.
+     *
+     * @param roleId The unique identifier for the role.
+     */
     public Role(Integer roleId) {
         this.roleId = roleId;
     }
 
+    /**
+     * Initializes a new instance of the Role class with the specified role ID
+     * and role name.
+     *
+     * @param roleId The unique identifier for the role.
+     * @param roleName The name of the role.
+     */
     public Role(Integer roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
     }
 
+    /**
+     * Retrieves the role ID.
+     *
+     * @return The unique identifier for the role.
+     */
     public Integer getRoleId() {
         return roleId;
     }
 
+    /**
+     * Sets the role ID.
+     *
+     * @param roleId The unique identifier for the role.
+     */
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
+    /**
+     * Retrieves the role name.
+     *
+     * @return The name of the role.
+     */
     public String getRoleName() {
         return roleName;
     }
 
+    /**
+     * Sets the role name.
+     *
+     * @param roleName The name of the role.
+     */
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
+    /**
+     * Retrieves the list of users associated with this role.
+     *
+     * @return A list of User objects associated with the role.
+     */
     @XmlTransient
     public List<User> getUserList() {
         return userList;
     }
 
+    /**
+     * Sets the list of users associated with this role.
+     *
+     * @param userList A list of User objects to be associated with the role.
+     */
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
 
+    /**
+     * Calculates the hash code for the Role object using the role ID.
+     *
+     * @return An integer representing the hash code.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -88,6 +135,13 @@ public class Role implements Serializable {
         return hash;
     }
 
+    /**
+     * Compares this Role object to the specified object for equality. The
+     * comparison is based on the role ID.
+     *
+     * @param object The object to compare this Role with.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -101,9 +155,14 @@ public class Role implements Serializable {
         return true;
     }
 
+    /**
+     * Generates a String representation of the Role object.
+     *
+     * @return A String representation of the Role object.
+     */
     @Override
     public String toString() {
         return "models.Role[ roleId=" + roleId + " ]";
     }
-    
+
 }

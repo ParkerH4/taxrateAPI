@@ -2,10 +2,6 @@ package viewmodels;
 
 import models.CanadaTaxRate;
 
-/**
- *
- * @author Kyle Helmer
- */
 public class CanadaTaxRateView {
 
     private int taxRateId;

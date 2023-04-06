@@ -8,11 +8,19 @@ import models.Location;
 import models.UsTaxRate;
 
 /**
- *
- * @author William Lau
+ * The UsTaxRateDB class is used to support CRUD functionality on the UsTaxRate
+ * table in the database.
  */
 public class UsTaxRateDB {
 
+    /**
+     * Retrieves the UsTaxRate associated with the given locationCode.
+     *
+     * @param locationCode The string representing a US ZipCode or Canada Postal
+     * Code.
+     * @return The UsTaxRate object associated with the provided locationCode,
+     * or null if not found.
+     */
     public UsTaxRate getUs(String locationCode) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -31,6 +39,11 @@ public class UsTaxRateDB {
         }
     }
 
+    /**
+     * Retrieves all UsTaxRate objects from the database.
+     *
+     * @return A list of all UsTaxRate objects stored in the database.
+     */
     public List<UsTaxRate> getAllUs() {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -45,6 +58,11 @@ public class UsTaxRateDB {
         }
     }
 
+    /**
+     * Inserts a new UsTaxRate object into the database.
+     *
+     * @param usTaxRate The UsTaxRate object to be inserted.
+     */
     public void insertUs(UsTaxRate usTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -68,6 +86,11 @@ public class UsTaxRateDB {
         }
     }
 
+    /**
+     * Deletes the given UsTaxRate object from the database.
+     *
+     * @param usTaxRate The UsTaxRate object to be deleted.
+     */
     public void deleteUs(UsTaxRate usTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -87,6 +110,11 @@ public class UsTaxRateDB {
         }
     }
 
+    /**
+     * Updates the given UsTaxRate object in the database.
+     *
+     * @param usTaxRate The UsTaxRate object containing the updated information.
+     */
     public void updateUs(UsTaxRate usTaxRate) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

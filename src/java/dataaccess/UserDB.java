@@ -8,11 +8,20 @@ import models.User;
 import models.Role;
 
 /**
+ * The UserDB class is used to support CRUD functionality on the User table in
+ * the database.
  *
- * @author William Lau
  */
 public class UserDB {
 
+    /**
+     * Retrieves the User object associated with the given username.
+     *
+     * @param username The string representing the username of the User.
+     * @return The User object associated with the provided username, or null if
+     * not found.
+     * @throws Exception If any exception occurs during the database operation.
+     */
     public User get(String username) throws Exception {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -28,6 +37,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * Retrieves all User objects from the database.
+     *
+     * @return A list of all User objects stored in the database.
+     * @throws Exception If any exception occurs during the database operation.
+     */
     public List<User> getAll() throws Exception {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -42,6 +57,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * Inserts a new User object into the database.
+     *
+     * @param user The User object to be inserted.
+     * @throws Exception If any exception occurs during the database operation.
+     */
     public void insert(User user) throws Exception {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -65,6 +86,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * Deletes the given User object from the database.
+     *
+     * @param user The User object to be deleted.
+     * @throws Exception If any exception occurs during the database operation.
+     */
     public void delete(User user) throws Exception {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -88,6 +115,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * Updates the given User object in the database.
+     *
+     * @param user The User object containing the updated information.
+     * @throws Exception If any exception occurs during the database operation.
+     */
     public void update(User user) throws Exception {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

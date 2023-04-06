@@ -3,8 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +12,7 @@ import models.CanadaTaxRate;
 import models.UsTaxRate;
 import services.LocationService;
 import services.TaxRateService;
+import services.Utilites;
 
 /**
  * AdminServlet servlet that services the /admin endpoint containing GET and POST methods.
@@ -21,122 +20,23 @@ import services.TaxRateService;
  */
 public class AdminServlet extends HttpServlet {
 
-    /**
-     * This method will check the argument if it is in postal code or zip code
-     * format. If it is one of those, will remove all whitespace from the string
-     * and return it. If it is not in a valid format, will return the original
-     * location code parameter passed into it.
-     *
-     * @param locationCode The string representation of a US Zip Code or Canada
-     * Postal Code
-     * @return the formatted zipcode, postalcode, if they are valid. Returns the
-     * locationCode if it is neither us or canada.
-     *
-     */
-    public String formatLocationCode(String locationCode) {
-        String parsedCode = "";
-
-        if (isUSCode(locationCode)) {
-            //return formatted zip code
-            parsedCode = locationCode.trim()
-                    // get rid of whitespace
-                    .replaceAll("\\s+", "")
-                    // first 5 digits only
-                    .substring(0, 5);
-        } else if (isCanCode(locationCode)) {
-            // return formatted postal code
-            parsedCode = locationCode.trim()
-                    .toUpperCase()
-                    // get rid of whitespace
-                    .replaceAll("\\s+", "")
-                    // keep only first 3 characters
-                    .substring(0, 3);
-        } else {
-            return locationCode;
-        }
-        return parsedCode;
-    }
-
-    /**
-     * Checks to see if the parameter passed into it matches a regular
-     * expression for a US zip code.
-     *
-     * @param locationCode The string representation of a US Zip Code or Canada
-     * Postal Code
-     * @return true if it is in US Zip Code format
-     */
-    public boolean isUSCode(String locationCode) {
-        // sanitize input
-
-        if (locationCode == null) {
-            return false;
-        }
-        locationCode = locationCode.trim()
-                // get rid of all whitespace
-                .replaceAll("\\s+", "");
-        String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(locationCode);
-        if (matcher.matches()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Checks to see if the parameter passed into it matches a regular
-     * expression for the first 3 characters of a Canada postal code.
-     *
-     * @param locationCode The string representation of a US Zip Code or Canada
-     * Postal Code
-     * @return true if it is in Canada Postal Code format
-     */
-    public boolean isCanCode(String locationCode) {
-        // sanitize input
-        if (locationCode == null) {
-            return false;
-        }
-        locationCode = locationCode.toUpperCase()
-                .trim()
-                // get rid of all whitespace
-                .replaceAll("\\s+", "")
-                // keep only first 3 characters
-                .substring(0, 3);
-
-        String regex = "^(?:[a-zA-Z]\\d[a-zA-Z])$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(locationCode);
-        if (matcher.matches()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * 
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException 
-     */
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String searchField = request.getParameter("searchField");
-
+        Utilites util = new Utilites();
         TaxRateService trs = new TaxRateService();
         LocationService ls = new LocationService();
         CanadaTaxRate canTax = null;
         UsTaxRate usTax = null;
         try {
-            if (isCanCode(searchField)) {
+            if (util.isCanCode(searchField)) {
                 canTax = trs.getCan(searchField);
                 request.setAttribute("taxRate", canTax);
                 request.setAttribute("searchedLoc", "canada");
-            } else if (isUSCode(searchField)) {
+            } else if (util.isUSCode(searchField)) {
                 usTax = trs.getUs(searchField);
                 request.setAttribute("usTaxRate", usTax);
                 request.setAttribute("searchedLoc", "usa");
@@ -153,7 +53,8 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
+        Utilites util = new Utilites();
+        
         String action = request.getParameter("action");
         String searchString = request.getParameter("searchField");
 
@@ -227,10 +128,10 @@ public class AdminServlet extends HttpServlet {
                             session.setAttribute("message", "Error updating tax rate");
                             response.sendRedirect("admin");
                             return;
-                        } else if (isCanCode(editLocationCode)) {
+                        } else if (util.isCanCode(editLocationCode)) {
                             trs.updateCan(editCountry, editRegion, editLocationCode, editTaxRate1, editTaxRate2, editTaxRate3);
                             session.setAttribute("message", "Updated Tax Rate!");
-                        } else if (isUSCode(editLocationCode) && editTaxRate2 == null && editTaxRate3 == null) {
+                        } else if (util.isUSCode(editLocationCode) && editTaxRate2 == null && editTaxRate3 == null) {
                             trs.updateUs(editCountry, editRegion, editLocationCode, editTaxRate1);
                             session.setAttribute("message", "Updated Tax Rate!");
                         } else {
@@ -272,10 +173,10 @@ public class AdminServlet extends HttpServlet {
 
                         if (deleteField.equals("")) {
                             session.setAttribute("message", "Null values or empty strings not permitted in the input for deleting a tax rate.");
-                        } else if (isCanCode(deleteField)) {
+                        } else if (util.isCanCode(deleteField)) {
                             trs.deleteCan(deleteField);
                             session.setAttribute("message", "Tax rate " + deleteField + " has been deleted.");
-                        } else if (isUSCode(deleteField)) {
+                        } else if (util.isUSCode(deleteField)) {
                             trs.deleteUs(deleteField);
                             session.setAttribute("message", "Tax rate " + deleteField + " has been deleted.");
                         }

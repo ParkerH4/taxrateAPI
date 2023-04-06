@@ -69,9 +69,7 @@ public class CanadaTaxRateDB {
 
             tran.begin();
             em.merge(loc);
-
             em.persist(canTaxRate);
-
             tran.commit();
 
         } catch (Exception ex) {

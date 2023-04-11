@@ -90,9 +90,11 @@ public class CanadaTaxRateDB {
         EntityTransaction tran = em.getTransaction();
 
         try {
-
+            Location loc = canTaxRate.getLocation();
             tran.begin();
+            loc.getCanadaTaxRateList().clear();
             em.remove(em.merge(canTaxRate));
+            em.merge(loc);
             tran.commit();
 
         } catch (Exception ex) {

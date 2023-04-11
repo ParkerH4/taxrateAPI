@@ -7,8 +7,9 @@ import javax.persistence.Query;
 import models.Location;
 
 /**
- * LocationDB class is used to support CRUD functionality on the location table in the taxrate database.
- * 
+ * LocationDB class is used to support CRUD functionality on the location table
+ * in the taxrate database.
+ *
  */
 public class LocationDB {
 
@@ -16,7 +17,7 @@ public class LocationDB {
     }
 
     /**
-     * 
+     *
      * @return A List of all Location objects from the database.
      */
     public List<Location> getAll() {
@@ -33,8 +34,9 @@ public class LocationDB {
     }
 
     /**
-     * 
-     * @param locationCode The string that represents a US ZipCode or Canada Postal Code
+     *
+     * @param locationCode The string that represents a US ZipCode or Canada
+     * Postal Code
      * @return A location object retrieved from the database.
      */
     public Location getLoc(String locationCode) {
@@ -50,8 +52,9 @@ public class LocationDB {
     }
 
     /**
-     * 
-     * @param region The internationally approved alpha code, which is a representation of a US State or Canada Province.
+     *
+     * @param region The internationally approved alpha code, which is a
+     * representation of a US State or Canada Province.
      * @return the List of all location objects associated with the alpha code
      */
     public List<Location> getAllRegion(String region) {
@@ -69,8 +72,9 @@ public class LocationDB {
     }
 
     /**
-     * 
-     * @param loc Location object that will be inserted into the Location table in the taxratedb database.
+     *
+     * @param loc Location object that will be inserted into the Location table
+     * in the taxratedb database.
      */
     public void insertLoc(Location loc) {
 
@@ -93,8 +97,9 @@ public class LocationDB {
     }
 
     /**
-     * 
-     * @param loc Location object that will be updated in the Location table of the taxratedb database.
+     *
+     * @param loc Location object that will be updated in the Location table of
+     * the taxratedb database.
      */
     public void updateLoc(Location loc) {
 
@@ -103,9 +108,9 @@ public class LocationDB {
 
         try {
             trans.begin();
-            em.merge(loc);
+            em.merge(em.merge(loc));
             trans.commit();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             trans.rollback();
@@ -116,8 +121,9 @@ public class LocationDB {
     }
 
     /**
-     * 
-     * @param loc Location object that will be removed from the Location table of the taxratedb database.
+     *
+     * @param loc Location object that will be removed from the Location table
+     * of the taxratedb database.
      */
     public void deleteLoc(Location loc) {
 
@@ -128,10 +134,12 @@ public class LocationDB {
             trans.begin();
             em.remove(em.merge(loc));
             trans.commit();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             trans.rollback();
+            em.close();
+        }finally {
             em.close();
         }
 

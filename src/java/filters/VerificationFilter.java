@@ -24,10 +24,10 @@ import services.AuthService;
 public class VerificationFilter implements Filter {
 
     private static final PublicKey PUBLIC_KEY = AuthService.getInstance().getPublicKey();
-    
+
     public VerificationFilter() {
     }
-    
+
     /**
      *
      * @param request The servlet request we are processing
@@ -48,7 +48,6 @@ public class VerificationFilter implements Filter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String jwt = authHeader.substring(7);
-            System.out.println("VerificationFilter - JWT before verification: " + jwt);
 
             try {
                 // Verify the JWT using the public key
@@ -57,19 +56,15 @@ public class VerificationFilter implements Filter {
                         .build()
                         .parseClaimsJws(jwt);
                 // If the JWT is valid, proceed
-                System.out.println("VerificationFilter - JWT is valid, proceed..");
                 chain.doFilter(request, response);
             } catch (JwtException e) {
                 // Invalid JWT, return unauthorized status
                 e.printStackTrace();
                 httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 httpRes.getWriter().write("Invalid token");
-                System.out.println("VerificationFilter - UNAUTHORIZED");
-
             }
         } else {
-            chain.doFilter(request, response);
-            System.out.println("VerificationFilter - In the else..");
+            httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 

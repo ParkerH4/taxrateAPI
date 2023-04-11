@@ -74,9 +74,11 @@ public class UsTaxRateDB {
         EntityTransaction tran = em.getTransaction();
 
         try {
-
+            Location loc = usTaxRate.getLocation();
             tran.begin();
+            loc.getUsTaxRateList().clear();
             em.remove(em.merge(usTaxRate));
+            em.merge(loc);
             tran.commit();
 
         } catch (Exception ex) {

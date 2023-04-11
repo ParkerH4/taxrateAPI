@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
 import io.jsonwebtoken.Claims;
@@ -21,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import services.AuthService;
 
+/**
+ * The VerificationFilter class is an implementation of the Filter interface. It
+ * is used to verify JWT tokens in the request header and to ensure that the
+ * user is authorized to access the TaxRateServlet.
+ */
 public class VerificationFilter implements Filter {
 
     private static final PublicKey PUBLIC_KEY = AuthService.getInstance().getPublicKey();
@@ -29,13 +29,15 @@ public class VerificationFilter implements Filter {
     }
 
     /**
+     * Executes the filtering process. If the user is authorized (logged in and
+     * received the public key), they may access the TaxRateServlet, which
+     * contains methods to interact with the TaxRate API.
      *
-     * @param request The servlet request we are processing
-     * @param response The servlet response we are creating
-     * @param chain The filter chain we are processing
-     *
-     * @exception IOException if an input/output error occurs
-     * @exception ServletException if a servlet error occurs
+     * @param request The servlet request we are processing.
+     * @param response The servlet response we are creating.
+     * @param chain The filter chain we are processing.
+     * @exception IOException If an input/output error occurs.
+     * @exception ServletException If a servlet error occurs.
      */
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
@@ -59,9 +61,9 @@ public class VerificationFilter implements Filter {
                 chain.doFilter(request, response);
             } catch (JwtException e) {
                 // Invalid JWT, return unauthorized status
-                e.printStackTrace();
                 httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 httpRes.getWriter().write("Invalid token");
+
             }
         } else {
             httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -69,13 +71,18 @@ public class VerificationFilter implements Filter {
     }
 
     /**
-     * Destroy method for this filter
+     * Destroy method for this filter. Can be used to release any resources held
+     * by the filter.
      */
     public void destroy() {
     }
 
     /**
-     * Init method for this filter
+     * Init method for this filter. Can be used to initialize any resources
+     * required by the filter.
+     *
+     * @param filterConfig The filter configuration object used to initialize
+     * the filter.
      */
     public void init(FilterConfig filterConfig) {
     }

@@ -9,8 +9,9 @@ import models.CanadaTaxRate;
 import models.UsTaxRate;
 
 /**
- *
- * @author William Lau
+ * TaxRateService is a class responsible for managing tax rate data and
+ * providing methods to interact with the CanadaTaxRateDB, UsTaxRateDB, and
+ * LocationDB database classes.
  */
 public class TaxRateService {
 
@@ -19,17 +20,42 @@ public class TaxRateService {
     private LocationDB locDB = new LocationDB();
     private LocationService ls = new LocationService();
 
-    //Canada tax rates
+    //CanadaTaxRate methods
+    /**
+     * Retrieves the CanadaTaxRate for a given location code.
+     *
+     * @param locationCode The location code to search for.
+     * @return The CanadaTaxRate associated with the specified location code.
+     * @throws Exception if an error occurs during the database query.
+     */
     public CanadaTaxRate getCan(String locationCode) throws Exception {
 
         return canTaxDB.getCan(locationCode);
     }
 
+    /**
+     * Retrieves a list of all CanadaTaxRate records.
+     *
+     * @return A List of CanadaTaxRate objects.
+     * @throws Exception if an error occurs during the database query.
+     */
     public List<CanadaTaxRate> getAllCan() throws Exception {
 
         return canTaxDB.getAllCan();
     }
 
+    /**
+     * Inserts a new CanadaTaxRate record into the database via LocationDB and
+     * CanadaTaxrateDB.
+     *
+     * @param country The country of the new tax rate.
+     * @param region The region of the new tax rate.
+     * @param locationCode The location code of the new tax rate.
+     * @param gst The GST tax rate value.
+     * @param pst The PST tax rate value.
+     * @param hst The HST tax rate value.
+     * @throws Exception if an error occurs during the database operation.
+     */
     public void insertCan(String country, String region, String locationCode, String gst, String pst, String hst) throws Exception {
 
         double parseGst = Double.parseDouble(gst);
@@ -49,12 +75,29 @@ public class TaxRateService {
         canTaxDB.insertCan(canTaxRate);
     }
 
+    /**
+     * Deletes a CanadaTaxRate record from the database.
+     *
+     * @param locationCode The location code of the tax rate to delete.
+     * @throws Exception if an error occurs during the database operation.
+     */
     public void deleteCan(String locationCode) throws Exception {
 
         CanadaTaxRate canTaxRate = canTaxDB.getCan(locationCode);
         canTaxDB.deleteCan(canTaxRate);
     }
 
+    /**
+     * Updates an existing CanadaTaxRate record in the database.
+     *
+     * @param country The updated country value.
+     * @param region The updated region value.
+     * @param locationCode The location code of the tax rate to update.
+     * @param gst The updated GST tax rate value.
+     * @param pst The updated PST tax rate value.
+     * @param hst The updated HST tax rate value.
+     * @throws Exception if an error occurs during the database operation.
+     */
     public void updateCan(String country, String region, String locationCode, String gst, String pst, String hst) throws Exception {
 
         double parseGst = Double.parseDouble(gst);
@@ -83,11 +126,26 @@ public class TaxRateService {
         return usTaxDB.getUs(locationCode);
     }
 
+    /**
+     * Retrieves a list of all UsTaxRate records.
+     *
+     * @return A List of UsTaxRate objects.
+     * @throws Exception if an error occurs during the database query.
+     */
     public List<UsTaxRate> getAllUs() throws Exception {
 
         return usTaxDB.getAllUs();
     }
 
+    /**
+     * Inserts a new UsTaxRate record into the database.
+     *
+     * @param country The country of the new tax rate.
+     * @param region The region of the new tax rate.
+     * @param locationCode The location code of the new tax rate.
+     * @param stateTax The state tax rate value.
+     * @throws Exception if an error occurs during the database operation.
+     */
     public void insertUs(String country, String region, String locationCode, String stateTax) throws Exception {
 
         double parseStateTax = Double.parseDouble(stateTax);
@@ -104,6 +162,12 @@ public class TaxRateService {
         usTaxDB.insertUs(usTaxRate);
     }
 
+    /**
+     * Deletes a UsTaxRate record from the database.
+     *
+     * @param locationCode The location code of the tax rate to delete.
+     * @throws Exception if an error occurs during the database operation.
+     */
     public void deleteUs(String locationCode) throws Exception {
 
         UsTaxRate usTaxRate = usTaxDB.getUs(locationCode);
@@ -111,6 +175,15 @@ public class TaxRateService {
         
     }
 
+    /**
+     * Updates an existing UsTaxRate record in the database.
+     *
+     * @param country The updated country value.
+     * @param region The updated region value.
+     * @param locationCode The location code of the tax rate to update.
+     * @param stateTax The updated state tax rate value.
+     * @throws Exception if an error occurs during the database operation.
+     */
     public void updateUs(String country, String region, String locationCode, String stateTax) throws Exception {
 
         double parseStateTax = Double.parseDouble(stateTax);

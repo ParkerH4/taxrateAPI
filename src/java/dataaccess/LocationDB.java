@@ -74,7 +74,7 @@ public class LocationDB {
     /**
      *
      * @param loc Location object that will be inserted into the Location table
-     * in the taxratedb database.
+     * in the taxratedb database
      */
     public void insertLoc(Location loc) {
 

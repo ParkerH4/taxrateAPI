@@ -12,23 +12,32 @@ import models.CanadaTaxRate;
 import models.UsTaxRate;
 import services.LocationService;
 import services.TaxRateService;
-import services.Utilites;
+import services.Utilities;
 
 /**
- * AdminServlet servlet that services the /admin endpoint containing GET and POST methods.
- * 
+ * AdminServlet is a servlet class that extends HttpServlet to handle
+ * administrator actions related to tax rates for both Canadian and US
+ * locations. These are CRUD operations.
  */
 public class AdminServlet extends HttpServlet {
 
-   
+    /**
+     * Handles the HTTP GET method for the administrator page.
+     *
+     * @param request The HttpServletRequest object containing client request
+     * data.
+     * @param response The HttpServletResponse object containing server response
+     * data.
+     * @throws ServletException if an error occurs during servlet processing.
+     * @throws IOException if an error occurs during input/output operations.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String searchField = request.getParameter("searchField");
-        Utilites util = new Utilites();
+        Utilities util = new Utilities();
         TaxRateService trs = new TaxRateService();
-        LocationService ls = new LocationService();
         CanadaTaxRate canTax = null;
         UsTaxRate usTax = null;
         try {
@@ -48,24 +57,26 @@ public class AdminServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 
+    /**
+     * Handles the HTTP POST method for administrator actions. These actions
+     * include create, update, and delete methods for the TaxRate API's database
+     * records.
+     *
+     * @param request The HttpServletRequest object containing client request
+     * data.
+     * @param response The HttpServletResponse object containing server response
+     * data.
+     * @throws ServletException if an error occurs during servlet processing.
+     * @throws IOException if an error occurs during input/output operations.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        Utilites util = new Utilites();
-        
         String action = request.getParameter("action");
-        String searchString = request.getParameter("searchField");
 
-        // variables for a tax rate
-        String country = request.getParameter("searchCountry");
-        String region = request.getParameter("searchRegion");
-        String locationCode = request.getParameter("searchLocationCode");
-        String taxRate1 = request.getParameter("searchTaxRate1");
-        String taxRate2 = request.getParameter("searchTaxRate2");
-        String taxRate3 = request.getParameter("searchTaxRate3");
-
+        //variables for adding a taxrate with the admin page
         String addCountry = request.getParameter("addCountry");
         String addRegion = request.getParameter("addRegion");
         String addLocationCode = request.getParameter("addLocationCode");
@@ -74,9 +85,8 @@ public class AdminServlet extends HttpServlet {
         String addTaxRate3 = request.getParameter("addTaxRate3");
 
         TaxRateService trs = new TaxRateService();
-        LocationService ls = new LocationService();
-        CanadaTaxRate canTax = new CanadaTaxRate();
-        UsTaxRate usTax = new UsTaxRate();
+        Utilities util = new Utilities();
+
         if (action != null) {
             switch (action) {
 
@@ -89,15 +99,15 @@ public class AdminServlet extends HttpServlet {
                     } else {
                         try {
                             trs.insertCan(addCountry, addRegion, addLocationCode, addTaxRate1, addTaxRate2, addTaxRate3);
-                            session.setAttribute("message", "Added Tax Rate!");
+                            session.setAttribute("message", "Added Canada Tax Rate!");
                         } catch (Exception ex) {
                             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     response.sendRedirect("admin");
                     return;
-                    
-                     case "addUs":
+
+                case "addUs":
                     if (addCountry == null || addRegion == null || addLocationCode == null || addTaxRate1 == null
                             || addCountry.equals("") || addRegion.equals("") || addLocationCode.equals("") || addTaxRate1.equals("")) {
                         session.setAttribute("message", "Error adding TaxRate. Null or empty fields in the adding form.");
@@ -106,7 +116,7 @@ public class AdminServlet extends HttpServlet {
                     } else {
                         try {
                             trs.insertUs(addCountry, addRegion, addLocationCode, addTaxRate1);
-                            session.setAttribute("message", "Added Tax Rate!");
+                            session.setAttribute("message", "Added US Tax Rate!");
                         } catch (Exception ex) {
                             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -130,12 +140,11 @@ public class AdminServlet extends HttpServlet {
                             return;
                         } else if (util.isCanCode(editLocationCode)) {
                             trs.updateCan(editCountry, editRegion, editLocationCode, editTaxRate1, editTaxRate2, editTaxRate3);
-                            session.setAttribute("message", "Updated Tax Rate!");
+                            session.setAttribute("message", "Updated Canada Tax Rate!");
                         } else if (util.isUSCode(editLocationCode) && editTaxRate2 == null && editTaxRate3 == null) {
                             trs.updateUs(editCountry, editRegion, editLocationCode, editTaxRate1);
-                            session.setAttribute("message", "Updated Tax Rate!");
+                            session.setAttribute("message", "Updated US Tax Rate!");
                         } else {
-
                         }
                     } catch (Exception ex) {
                         Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,12 +162,12 @@ public class AdminServlet extends HttpServlet {
 
                         if (editCountry == null || editRegion == null || editLocationCode == null || editTaxRate1 == null
                                 || editCountry.equals("") || editRegion.equals("") || editLocationCode.equals("") || editTaxRate1.equals("")) {
-                            session.setAttribute("message", "Error updating tax rate");
+                            session.setAttribute("message", "Error updating tax rate. No null or empty values allowed in the edit form.");
                             response.sendRedirect("admin");
                             return;
-                        } else{
+                        } else {
                             trs.updateUs(editCountry, editRegion, editLocationCode, editTaxRate1);
-                            session.setAttribute("message", "Updated Tax Rate!");
+                            session.setAttribute("message", "Updated US Tax Rate!");
                         }
                     } catch (Exception ex) {
                         Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);

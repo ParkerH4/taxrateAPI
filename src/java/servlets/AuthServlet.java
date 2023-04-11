@@ -15,13 +15,15 @@ import models.User;
 import services.AuthService;
 import services.UserService;
 
+/**
+ * AuthServlet is a class that extends HttpServlet to handle user authentication
+ * and generation of JSON Web Tokens (JWTs) for authenticated users.
+ */
 public class AuthServlet extends HttpServlet {
 
-    //1 day
-    private static final long EXPIRATION_TIME = 86400000;
+    //1 hour expiration time
+    private static final long EXPIRATION_TIME = 3600000;
     private static final PrivateKey PRIVATE_KEY = AuthService.getInstance().getPrivateKey();
-
-
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -34,7 +36,6 @@ public class AuthServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         // Validate username and password
         try {
             String username = request.getParameter("username");
@@ -50,19 +51,15 @@ public class AuthServlet extends HttpServlet {
                         .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                         .signWith(PRIVATE_KEY, SignatureAlgorithm.RS256)
                         .compact();
-                
-                System.out.println("PUBLIC KEY FROM AUTHSERVLET: " + AuthService.getInstance().getPublicKey());
+
                 response.setContentType("application/json");
                 response.getWriter().write("{ \"token\": \"" + jwt + "\" }");
-
             } else {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write("Invalid credentials.");
             }
-
         } catch (Exception ex) {
             Logger.getLogger(AuthServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

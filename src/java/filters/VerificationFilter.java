@@ -67,6 +67,7 @@ public class VerificationFilter implements Filter {
             }
         } else {
             httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpRes.getWriter().write("Invalid token");
         }
     }
 

@@ -66,12 +66,18 @@
                     <div class="hidden" id="editForm">
                         <h2>Edit Existing Tax Rate</h2> 
                         <form method="post" action="admin">
-                            <input type="text" name="editCountry" value="${taxRate.getLocation().getCountry()}"><br>
-                            <input type="text" name="editRegion"  value="${taxRate.getLocation().getRegion()}"><br>
-                            <input type="text" name="editLocationCode" readonly value="${taxRate.getLocation().getLocationCode()}"><br>
-                            <input type="text" name="editTaxRate1"  value="${taxRate.getGst()}"><br>
-                            <input type="text" name="editTaxRate2"  value="${taxRate.getPst()}"><br>
-                            <input type="text" name="editTaxRate3"  value="${taxRate.getHst()}"><br>
+                            <label for="editCountry">Country</label>
+                            <input type="text" id="editCountry" name="editCountry" value="${taxRate.getLocation().getCountry()}"><br>
+                            <label for="editRegion">Province</label>
+                            <input type="text" id="editRegion" name="editRegion"  value="${taxRate.getLocation().getRegion()}"><br>
+                            <label for="editLocationCode">Postal Code</label>
+                            <input type="text" id="editLocationCode" name="editLocationCode" readonly value="${taxRate.getLocation().getLocationCode()}"><br>
+                            <label for="editTaxRate1">GST</label>
+                            <input type="text" id="editTaxRate1" name="editTaxRate1"  value="${taxRate.getGst()}"><br>
+                            <label for="editTaxRate2">PST</label>
+                            <input type="text" id="editTaxRate2" name="editTaxRate2"  value="${taxRate.getPst()}"><br>
+                            <label for="editTaxRate3">HST</label><br>
+                            <input type="text" id="editTaxRate3" name="editTaxRate3"  value="${taxRate.getHst()}"><br>
                             <input type="hidden" name="action" value="edit" />
                             <input type="submit" value="Save Changes" />
                             <input type="hidden" name="action" value="cancel" />
@@ -107,10 +113,15 @@
                     <div class="hidden" id="editForm">
                         <h2>Edit Existing Tax Rate</h2> 
                         <form method="post" action="admin">
-                            <input type="text" name="editCountry" value="${usTaxRate.getLocation().getCountry()}"><br>
-                            <input type="text" name="editRegion"  value="${usTaxRate.getLocation().getRegion()}"><br>
-                            <input type="text" name="editLocationCode" readonly value="${usTaxRate.getLocation().getLocationCode()}"><br>
-                            <input type="text" name="editTaxRate1"  value="${usTaxRate.getStateTax()}"><br>
+
+                            <label for="editCountry">Country</label>
+                            <input type="text" id="editCountry" name="editCountry" value="${usTaxRate.getLocation().getCountry()}"><br>
+                            <label for="editRegion">State</label>
+                            <input type="text" id="editRegion" name="editRegion"  value="${usTaxRate.getLocation().getRegion()}"><br>
+                            <label for="editLocationCode">Zip Code</label>
+                            <input type="text" id="editLocationCode" name="editLocationCode" readonly value="${usTaxRate.getLocation().getLocationCode()}"><br>
+                            <label for="editTaxRate1">State Tax</label>
+                            <input type="text" id="editTaxRate1" name="editTaxRate1"  value="${usTaxRate.getStateTax()}"><br>
                             <input type="hidden" name="action" value="editUs" />
                             <input type="submit" value="Save Changes" />
                             <input type="hidden" name="action" value="cancel" />
@@ -135,14 +146,14 @@
 
     <%-- form to add new tax rate to DB --%>
     <div class="hidden" id="addForm">
-            <select id="addSelect" name="addCountry">
-                <option value="">---</option>
-                <option value="CAN">Canada</option>
-                <option value="USA">USA</option>
-            </select>
-            <br />
-            <!--Where JS will write the ADD FORM depending on what the user selects-->
-            <div id="addForm"></div>
+        <select id="addSelect" name="addCountry">
+            <option value="">---</option>
+            <option value="CAN">Canada</option>
+            <option value="USA">USA</option>
+        </select>
+        <br />
+        <!--Where JS will write the ADD FORM depending on what the user selects-->
+        <div id="addForm"></div>
     </div>
 
     <script type="text/javascript" src="./assets/scripts/admin.js"></script>

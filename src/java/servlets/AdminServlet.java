@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.CanadaTaxRate;
 import models.UsTaxRate;
-import services.LocationService;
 import services.TaxRateService;
 import services.Utilities;
 

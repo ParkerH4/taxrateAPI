@@ -47,7 +47,7 @@ public class UserService {
      */
     public User login(String username, String password) throws Exception {
         User user = userDB.get(username);
-        if (user.getPassword().equals(password)) {
+        if (user!=null && user.getPassword().equals(password)) {
             return user;
         } else {
             return null;

@@ -3,6 +3,7 @@ package dataaccess;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import models.User;
 import models.Role;
@@ -32,7 +33,10 @@ public class UserDB {
             User user = (User) queryGetUser.getSingleResult();
             return user;
 
-        } finally {
+        }catch(NoResultException e){
+            
+            return null;
+        }finally {
             em.close();
         }
     }

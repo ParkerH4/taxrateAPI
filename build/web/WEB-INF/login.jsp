@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="./assets/styles/login.css">
-        <title>atVenu Tax Rate API - Login</title>
+        <title>atVenu Client - Error Page</title>
     </head>
 
     <body>
